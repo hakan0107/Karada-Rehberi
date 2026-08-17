@@ -28,7 +28,7 @@ class Place {
   final String description;
   final String imageUrl;
 
-  Place({
+  const Place({
     required this.title,
     required this.subtitle,
     required this.description,
