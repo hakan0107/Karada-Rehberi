@@ -12,7 +12,7 @@ class MontenegroGuideApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Karadag Rehberi',
+      title: "Montenegro Travel",
       theme: ThemeData(
         primarySwatch: Colors.red,
         scaffoldBackgroundColor: Colors.grey[100],
