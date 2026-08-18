@@ -34,6 +34,20 @@ class HomeScreen extends StatelessWidget {
 
   final List<Place> places = const [
     Place(
+      title: 'Podgorica Niagara Şelalesi',
+      subtitle: 'Doğa Harikası',
+      description: 'Cijevna Nehri üzerinde yer alan, özellikle ilkbaharda coşkulu akan popüler şelale.',
+      imageUrl: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9',
+      mapUrl: 'https://www.google.com/maps/search/Niagara+Waterfall+Podgorica'
+    ),
+    Place(
+      title: 'Dajbabe Manastırı (Beyaz Kilise)',
+      subtitle: 'Tarihi Dini Yapı',
+      description: 'Podgorica yakınlarında, bir kayanın içine oyulmuş ve içerisindeki freskleriyle ünlü özel manastır.',
+      imageUrl: 'https://images.unsplash.com/photo-1548625149-fc4a29cf7092',
+      mapUrl: 'https://www.google.com/maps/search/Dajbabe+Monastery'
+    ),
+    Place(
       title: 'Kolasin Kayak Merkezi',
       subtitle: 'Kış Turizmi',
       description: 'Bjelasica Dağı eteklerinde modern kayak tesisleri.',
