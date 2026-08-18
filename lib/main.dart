@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
 
   final List<Place> places = const [
     Place(title: 'Skadar Gölü', subtitle: 'Balkanların En Büyüğü', description: 'Kuş cenneti ve eşsiz doğa manzaralarıyla ünlü göl.', imageUrl: 'https://images.pexels.com/photos/1534560/pexels-photo-1534560.jpeg', mapUrl: 'https://www.google.com/maps/search/Skadar+Lake'),
-    Place(title: 'Rijeka Crnojevića', subtitle: 'Tarihi Köprü ve Nehir', description: 'Eski köprüsü ve nehir kıyısı manzarasıyla ünlü huzurlu nokta.', imageUrl: 'https://images.pexels.com/photos/258523/pexels-photo-258523.jpeg', mapUrl: 'https://www.google.com/maps/search/Rijeka+Crnojevica'),
+    Place(title: 'Rijeka Crnojevića', subtitle: 'Tarihi Köprü', description: 'Eski köprüsü ve nehir kıyısı manzarasıyla ünlü huzurlu nokta.', imageUrl: 'https://images.pexels.com/photos/258523/pexels-photo-258523.jpeg', mapUrl: 'https://www.google.com/maps/search/Rijeka+Crnojevica'),
     Place(title: 'Virpazar', subtitle: 'Gölün Kalbi', description: 'Skadar Gölü üzerinde tekne turlarının kalktığı şirin balıkçı kasabası.', imageUrl: 'https://images.pexels.com/photos/848599/pexels-photo-848599.jpeg', mapUrl: 'https://www.google.com/maps/search/Virpazar'),
     Place(title: 'Podgorica Niagara Şelalesi', subtitle: 'Doğa Harikası', description: 'Cijevna Nehri üzerinde popüler şelale.', imageUrl: 'https://images.pexels.com/photos/1534560/pexels-photo-1534560.jpeg', mapUrl: 'https://www.google.com/maps/search/Niagara+Waterfall+Podgorica'),
     Place(title: 'Dajbabe Manastırı', subtitle: 'Tarihi Dini Yapı', description: 'Kayalara oyulmuş freskli özel manastır.', imageUrl: 'https://images.pexels.com/photos/258523/pexels-photo-258523.jpeg', mapUrl: 'https://www.google.com/maps/search/Dajbabe+Monastery'),
@@ -47,13 +47,6 @@ class HomeScreen extends StatelessWidget {
     Place(title: 'Durmitor Milli Parkı', subtitle: 'Doğa Harikası', description: 'Buzul gölleri ve derin kanyonlar.', imageUrl: 'https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg', mapUrl: 'https://www.google.com/maps/search/Durmitor+National+Park'),
     Place(title: 'Cetinje', subtitle: 'Tarihi Başkent', description: 'Kraliyet sarayı ve kültür merkezi.', imageUrl: 'https://images.pexels.com/photos/2085799/pexels-photo-2085799.jpeg', mapUrl: 'https://www.google.com/maps/search/Cetinje'),
   ];
-
-  Future<void> _launchURL(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,15 +61,54 @@ class HomeScreen extends StatelessWidget {
             child: ListTile(
               leading: SizedBox(width: 60, height: 60, child: ClipRRect(borderRadius: BorderRadius.circular(8), child: Image.network(p.imageUrl, fit: BoxFit.cover))),
               title: Text(p.title, style: const TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text('${p.subtitle}\n${p.description}'),
-              trailing: IconButton(
-                icon: const Icon(Icons.map, color: Colors.red),
-                onPressed: () => _launchURL(p.mapUrl),
-              ),
-              isThreeLine: true,
+              subtitle: Text(p.subtitle),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(place: p)));
+              },
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  final Place place;
+  const DetailScreen({super.key, required this.place});
+
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(place.title)),
+      body: Column(
+        children: [
+          Image.network(place.imageUrl, height: 250, width: double.infinity, fit: BoxFit.cover),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(place.title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                Text(place.description, style: const TextStyle(fontSize: 16)),
+                const SizedBox(height: 20),
+                ElevatedButton.icon(
+                  onPressed: () => _launchURL(place.mapUrl),
+                  icon: const Icon(Icons.map),
+                  label: const Text('Haritada Gör'),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
