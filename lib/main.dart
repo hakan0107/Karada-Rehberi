@@ -69,18 +69,24 @@ class ServicesScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Araç Kiralama & Konaklama')),
       body: ListView(
         children: [
-          const ExpansionTile(
-            title: Text("🚗 Araç Kiralama Firmaları", style: TextStyle(fontWeight: FontWeight.bold)),
-            children: [
-              // Buraya rent a car firmaları eklenecek
-            ],
-          ),
           ExpansionTile(
             title: const Text("🚗 Araç Kiralama Firmaları", style: TextStyle(fontWeight: FontWeight.bold)),
             children: [
               ListTile(
-                title: const Text("LocalRent (Yerel & Güvenilir)"),
-                subtitle: const Text("Karadağ'ın en popüler araç kiralama platformu"),
+                title: const Text("Montenegro Car"),
+                subtitle: const Text("Ülkenin en köklü yerel araç kiralama firması"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () => _launchURL("https://www.montenegrocar.me/"),
+              ),
+              ListTile(
+                title: const Text("Sixt Rent a Car Montenegro"),
+                subtitle: const Text("Uluslararası güvenilir küresel marka"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () => _launchURL("https://www.sixt.me/"),
+              ),
+              ListTile(
+                title: const Text("LocalRent"),
+                subtitle: const Text("Yerel acenteleri karşılaştırma platformu"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () => _launchURL("https://localrent.com/me/"),
               ),
