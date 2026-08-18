@@ -42,12 +42,12 @@ class MainDashboard extends StatelessWidget {
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
           children: [
+            _buildMenuCard(context, "Hava Durumu", Icons.wb_sunny, Colors.amber, const WeatherScreen()),
+            _buildMenuCard(context, "Ulaşım & Trafik", Icons.directions_car, Colors.teal, const TransportScreen()),
+            _buildMenuCard(context, "Pratik Bilgiler", Icons.info_outline, Colors.purple, const PracticalInfoScreen()),
             _buildMenuCard(context, "Konsolosluklar", Icons.flag, Colors.indigo, const EmbassyScreen()),
             _buildMenuCard(context, "Restoranlar", Icons.restaurant, Colors.orange, const RestaurantsScreen()),
             _buildMenuCard(context, "Gezilecek Yerler", Icons.place, Colors.blue, const PlacesScreen()),
-            _buildMenuCard(context, "Hizmetler & Oteller", Icons.hotel, Colors.green, const ServicesScreen()),
-            _buildMenuCard(context, "Pratik Bilgiler", Icons.info_outline, Colors.purple, const PracticalInfoScreen()),
-            _buildMenuCard(context, "Ulaşım & Trafik", Icons.directions_car, Colors.teal, const TransportScreen()),
           ],
         ),
       ),
@@ -84,32 +84,62 @@ class MainDashboard extends StatelessWidget {
   }
 }
 
-// ---------------- DİĞER SAYFALAR ----------------
-class PlacesScreen extends StatelessWidget {
-  const PlacesScreen({super.key});
+// ---------------- HAVA DURUMU SAYFASI (YENİ) ----------------
+class WeatherScreen extends StatelessWidget {
+  const WeatherScreen({super.key});
+
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) await launchUrl(uri, mode: LaunchMode.externalApplication);
+  }
+
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Gezilecek Yerler')), body: const Center(child: Text("Bölge listeleri aktif.")));
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Hava Durumu & Meteoroloji')),
+      body: ListView(
+        padding: const EdgeInsets.all(12),
+        children: [
+          Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      Icon(Icons.location_city, color: Colors.redAccent),
+                      SizedBox(width: 8),
+                      Text("Podgorica & Sahil Kesimi", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  const Divider(height: 20),
+                  const Text(
+                    "Karadağ'da hava durumu bölgelere göre çok değişebilir (Podgorica sıcakken dağlar serin veya karlı olabilir). Anlık ve güvenilir tahminler için resmi meteoroloji servisini inceleyebilirsiniz.",
+                    style: TextStyle(fontSize: 14, color: Colors.black87),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.amber[700],
+                      foregroundColor: Colors.white,
+                    ),
+                    onPressed: () => _launchURL("https://www.meteo.co.me/"),
+                    icon: const Icon(Icons.open_in_new),
+                    label: const Text("Resmi Hava Durumu (HMZH)"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-class RestaurantsScreen extends StatelessWidget {
-  const RestaurantsScreen({super.key});
-  @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Restoranlar')), body: const Center(child: Text("Restoranlar listesi aktif.")));
-}
-
-class ServicesScreen extends StatelessWidget {
-  const ServicesScreen({super.key});
-  @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Hizmetler & Oteller')), body: const Center(child: Text("Hizmetler listesi aktif.")));
-}
-
-class EmbassyScreen extends StatelessWidget {
-  const EmbassyScreen({super.key});
-  @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Konsolosluklar')), body: const Center(child: Text("Konsolosluklar listesi aktif.")));
-}
-
-// ---------------- ULAŞIM & TRAFİK SAYFASI (YENİ) ----------------
+// ---------------- ULAŞIM & TRAFİK SAYFASI ----------------
 class TransportScreen extends StatelessWidget {
   const TransportScreen({super.key});
 
@@ -135,6 +165,7 @@ class TransportScreen extends StatelessWidget {
                 ListTile(title: Text("Alkol Sınırı: 0.03 promil (Neredeyse sıfır tolerans).")),
                 ListTile(title: Text("Emniyet Kemeri: Ön ve arka koltuklarda zorunludur.")),
                 ListTile(title: Text("Hız Sınırları: Yerleşim yerinde 50 km/s, şehir dışında genelde 80 km/s.")),
+                ListTile(title: Text("Çocuk Koltuğu: 5 yaşından küçük çocuklar için zorunludur.")),
               ],
             ),
           ),
@@ -142,7 +173,7 @@ class TransportScreen extends StatelessWidget {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             child: ExpansionTile(
               leading: const Icon(Icons.directions_bus, color: Colors.blue),
-              title: const Text("🚌 Otobüs & Tren Seferleri", style: TextStyle(fontWeight: FontWeight.bold)),
+              title: const Text("🚌 Otobüs Seferleri", style: TextStyle(fontWeight: FontWeight.bold)),
               children: [
                 ListTile(
                   title: const Text("Podgorica Otogarı (Autobuska Stanica)"),
@@ -157,6 +188,31 @@ class TransportScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+// ---------------- DİĞER SAYFALAR ----------------
+class PlacesScreen extends StatelessWidget {
+  const PlacesScreen({super.key});
+  @override
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Gezilecek Yerler')), body: const Center(child: Text("Bölge listeleri aktif.")));
+}
+
+class RestaurantsScreen extends StatelessWidget {
+  const RestaurantsScreen({super.key});
+  @override
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Restoranlar')), body: const Center(child: Text("Restoranlar listesi aktif.")));
+}
+
+class ServicesScreen extends StatelessWidget {
+  const ServicesScreen({super.key});
+  @override
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Hizmetler & Oteller')), body: const Center(child: Text("Hizmetler listesi aktif.")));
+}
+
+class EmbassyScreen extends StatelessWidget {
+  const EmbassyScreen({super.key});
+  @override
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Konsolosluklar')), body: const Center(child: Text("Konsolosluklar listesi aktif.")));
 }
 
 // ---------------- PRATİK BİLGİLER ----------------
