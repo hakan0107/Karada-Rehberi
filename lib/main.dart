@@ -14,99 +14,79 @@ class MontenegroGuideApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Montenegro Travel',
       theme: ThemeData(primarySwatch: Colors.red),
-      home: const HomeScreen(),
+      home: const MainScreen(),
     );
   }
 }
 
-class Place {
-  final String title;
-  final String subtitle;
-  final String description;
-  final String imageUrl;
-  final String mapUrl;
-
-  const Place({required this.title, required this.subtitle, required this.description, required this.imageUrl, required this.mapUrl});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+  @override
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  final List<Place> places = const [
-    Place(title: 'Skadar Gölü', subtitle: 'Balkanların En Büyüğü', description: 'Kuş cenneti ve eşsiz doğa manzaralarıyla ünlü göl.', imageUrl: 'https://images.pexels.com/photos/1534560/pexels-photo-1534560.jpeg', mapUrl: 'https://www.google.com/maps/search/Skadar+Lake'),
-    Place(title: 'Rijeka Crnojevića', subtitle: 'Tarihi Köprü', description: 'Eski köprüsü ve nehir kıyısı manzarasıyla ünlü huzurlu nokta.', imageUrl: 'https://images.pexels.com/photos/258523/pexels-photo-258523.jpeg', mapUrl: 'https://www.google.com/maps/search/Rijeka+Crnojevica'),
-    Place(title: 'Virpazar', subtitle: 'Gölün Kalbi', description: 'Skadar Gölü üzerinde tekne turlarının kalktığı şirin balıkçı kasabası.', imageUrl: 'https://images.pexels.com/photos/848599/pexels-photo-848599.jpeg', mapUrl: 'https://www.google.com/maps/search/Virpazar'),
-    Place(title: 'Podgorica Niagara Şelalesi', subtitle: 'Doğa Harikası', description: 'Cijevna Nehri üzerinde popüler şelale.', imageUrl: 'https://images.pexels.com/photos/1534560/pexels-photo-1534560.jpeg', mapUrl: 'https://www.google.com/maps/search/Niagara+Waterfall+Podgorica'),
-    Place(title: 'Dajbabe Manastırı', subtitle: 'Tarihi Dini Yapı', description: 'Kayalara oyulmuş freskli özel manastır.', imageUrl: 'https://images.pexels.com/photos/258523/pexels-photo-258523.jpeg', mapUrl: 'https://www.google.com/maps/search/Dajbabe+Monastery'),
-    Place(title: 'Kolasin Kayak Merkezi', subtitle: 'Kış Turizmi', description: 'Bjelasica Dağı eteklerinde modern tesisler.', imageUrl: 'https://images.pexels.com/photos/848599/pexels-photo-848599.jpeg', mapUrl: 'https://www.google.com/maps/search/Kolasin+Ski+Resort'),
-    Place(title: 'Ostrog Manastırı', subtitle: 'Kutsal Hac Merkezi', description: 'Dikey kayaya oyulmuş eşsiz manastır.', imageUrl: 'https://images.pexels.com/photos/459024/pexels-photo-459024.jpeg', mapUrl: 'https://www.google.com/maps/search/Ostrog+Monastery'),
-    Place(title: 'Kotor Körfezi', subtitle: 'UNESCO Mirası', description: 'Büyüleyici körfez ve eski şehir merkezi.', imageUrl: 'https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg', mapUrl: 'https://www.google.com/maps/search/Kotor'),
-    Place(title: 'Eski Bar (Stari Bar)', subtitle: 'Tarihi Kalıntılar', description: 'Zeytin ağaçları arasında antik kent.', imageUrl: 'https://images.pexels.com/photos/1486222/pexels-photo-1486222.jpeg', mapUrl: 'https://www.google.com/maps/search/Stari+Bar'),
-    Place(title: 'Sutomore', subtitle: 'Sahil Kasabası', description: 'Geniş plajları ile ünlü kıyı bölgesi.', imageUrl: 'https://images.pexels.com/photos/1269383/pexels-photo-1269383.jpeg', mapUrl: 'https://www.google.com/maps/search/Sutomore'),
-    Place(title: 'Sveti Stefan', subtitle: 'İkonik Ada', description: 'Dünyaca ünlü, lüks tarihi yarımada.', imageUrl: 'https://images.pexels.com/photos/592398/pexels-photo-592398.jpeg', mapUrl: 'https://www.google.com/maps/search/Sveti+Stefan'),
-    Place(title: 'Durmitor Milli Parkı', subtitle: 'Doğa Harikası', description: 'Buzul gölleri ve derin kanyonlar.', imageUrl: 'https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg', mapUrl: 'https://www.google.com/maps/search/Durmitor+National+Park'),
-    Place(title: 'Cetinje', subtitle: 'Tarihi Başkent', description: 'Kraliyet sarayı ve kültür merkezi.', imageUrl: 'https://images.pexels.com/photos/2085799/pexels-photo-2085799.jpeg', mapUrl: 'https://www.google.com/maps/search/Cetinje'),
+class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0;
+  final List<Widget> _pages = [
+    const PlacesScreen(),
+    const Center(child: Text("Restoranlar Yakında Eklenecek")),
+    const ServicesScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Montenegro Travel')),
-      body: ListView.builder(
-        itemCount: places.length,
-        itemBuilder: (context, index) {
-          final p = places[index];
-          return Card(
-            margin: const EdgeInsets.all(10),
-            child: ListTile(
-              leading: SizedBox(width: 60, height: 60, child: ClipRRect(borderRadius: BorderRadius.circular(8), child: Image.network(p.imageUrl, fit: BoxFit.cover))),
-              title: Text(p.title, style: const TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text(p.subtitle),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(place: p)));
-              },
-            ),
-          );
-        },
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: (index) => setState(() => _selectedIndex = index),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.place), label: 'Gezilecek'),
+          BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: 'Yemek'),
+          BottomNavigationBarItem(icon: Icon(Icons.build), label: 'Hizmetler'),
+        ],
       ),
     );
   }
 }
 
-class DetailScreen extends StatelessWidget {
-  final Place place;
-  const DetailScreen({super.key, required this.place});
+class PlacesScreen extends StatelessWidget {
+  const PlacesScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Gezilecek Yerler')),
+      body: ListView(children: const [
+        ListTile(title: Text("Skadar Gölü"), subtitle: Text("Balkanların En Büyüğü")),
+        ListTile(title: Text("Kotor Körfezi"), subtitle: Text("UNESCO Mirası")),
+      ]),
+    );
+  }
+}
+
+class ServicesScreen extends StatelessWidget {
+  const ServicesScreen({super.key});
 
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
+    if (await canLaunchUrl(uri)) await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(place.title)),
-      body: Column(
+      appBar: AppBar(title: const Text('Araç & Konaklama')),
+      body: ListView(
         children: [
-          Image.network(place.imageUrl, height: 250, width: double.infinity, fit: BoxFit.cover),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(place.title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 10),
-                Text(place.description, style: const TextStyle(fontSize: 16)),
-                const SizedBox(height: 20),
-                ElevatedButton.icon(
-                  onPressed: () => _launchURL(place.mapUrl),
-                  icon: const Icon(Icons.map),
-                  label: const Text('Haritada Gör'),
-                ),
-              ],
-            ),
+          ListTile(
+            leading: const Icon(Icons.directions_car, color: Colors.red),
+            title: const Text("Araç Kiralama (LocalRent)"),
+            onTap: () => _launchURL("https://localrent.com/me/"),
+          ),
+          ListTile(
+            leading: const Icon(Icons.home, color: Colors.red),
+            title: const Text("Konaklama (Booking.com)"),
+            onTap: () => _launchURL("https://www.booking.com/city/me/podgorica.tr.html"),
           ),
         ],
       ),
