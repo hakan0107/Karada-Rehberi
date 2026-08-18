@@ -5,12 +5,21 @@ void main() => runApp(const MontenegroApp());
 
 class MontenegroApp extends StatelessWidget {
   const MontenegroApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Montenegro Travel',
-      theme: ThemeData(primarySwatch: Colors.red),
+      title: 'Montenegro Super App',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+        scaffoldBackgroundColor: Colors.grey[100],
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.redAccent,
+          foregroundColor: Colors.white,
+          elevation: 2,
+        ),
+      ),
       home: const MainDashboard(),
     );
   }
@@ -22,17 +31,24 @@ class MainDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Montenegro Super App')),
-      body: GridView.count(
-        crossAxisCount: 2,
-        padding: const EdgeInsets.all(16),
-        children: [
-          _buildMenuCard(context, "Konsolosluklar", Icons.flag, Colors.indigo, const EmbassyScreen()),
-          _buildMenuCard(context, "Restoranlar", Icons.restaurant, Colors.orange, const RestaurantsScreen()),
-          _buildMenuCard(context, "Gezilecek Yerler", Icons.place, Colors.blue, const PlacesScreen()),
-          _buildMenuCard(context, "Hizmetler & Oteller", Icons.hotel, Colors.green, const ServicesScreen()),
-          _buildMenuCard(context, "Pratik Bilgiler", Icons.info_outline, Colors.purple, const PracticalInfoScreen()),
-        ],
+      appBar: AppBar(
+        title: const Text('Montenegro Super App', style: TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+          children: [
+            _buildMenuCard(context, "Konsolosluklar", Icons.flag, Colors.indigo, const EmbassyScreen()),
+            _buildMenuCard(context, "Restoranlar", Icons.restaurant, Colors.orange, const RestaurantsScreen()),
+            _buildMenuCard(context, "Gezilecek Yerler", Icons.place, Colors.blue, const PlacesScreen()),
+            _buildMenuCard(context, "Hizmetler & Oteller", Icons.hotel, Colors.green, const ServicesScreen()),
+            _buildMenuCard(context, "Pratik Bilgiler", Icons.info_outline, Colors.purple, const PracticalInfoScreen()),
+          ],
+        ),
       ),
     );
   }
@@ -40,16 +56,26 @@ class MainDashboard extends StatelessWidget {
   Widget _buildMenuCard(BuildContext context, String title, IconData icon, Color color, Widget page) {
     return Card(
       elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => page));
         },
+        borderRadius: BorderRadius.circular(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 45, color: color),
-            const SizedBox(height: 10),
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+            CircleAvatar(
+              radius: 30,
+              backgroundColor: color.withOpacity(0.15),
+              child: Icon(icon, size: 35, color: color),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),
@@ -57,38 +83,32 @@ class MainDashboard extends StatelessWidget {
   }
 }
 
+// ---------------- DİĞER SAYFALAR ----------------
 class PlacesScreen extends StatelessWidget {
   const PlacesScreen({super.key});
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text('Gezilecek Yerler')), body: const Center(child: Text("Bölge listeleri aktif.")));
-  }
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Gezilecek Yerler')), body: const Center(child: Text("Bölge listeleri yakında aktif.")));
 }
 
 class RestaurantsScreen extends StatelessWidget {
   const RestaurantsScreen({super.key});
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text('Restoranlar')), body: const Center(child: Text("Restoranlar listesi aktif.")));
-  }
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Restoranlar')), body: const Center(child: Text("Restoranlar listesi yakında aktif.")));
 }
 
 class ServicesScreen extends StatelessWidget {
   const ServicesScreen({super.key});
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text('Hizmetler')), body: const Center(child: Text("Hizmetler listesi aktif.")));
-  }
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Hizmetler & Oteller')), body: const Center(child: Text("Hizmetler listesi yakında aktif.")));
 }
 
 class EmbassyScreen extends StatelessWidget {
   const EmbassyScreen({super.key});
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text('Konsolosluklar')), body: const Center(child: Text("Konsolosluklar listesi aktif.")));
-  }
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Konsolosluklar')), body: const Center(child: Text("Konsolosluklar listesi yakında aktif.")));
 }
 
+// ---------------- PRATİK BİLGİLER ----------------
 class PracticalInfoScreen extends StatelessWidget {
   const PracticalInfoScreen({super.key});
 
@@ -102,27 +122,45 @@ class PracticalInfoScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Pratik Bilgiler')),
       body: ListView(
+        padding: const EdgeInsets.all(12),
         children: [
-          const ExpansionTile(
-            title: Text("🚨 Acil Durum Numaraları", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
-            children: [
-              ListTile(title: Text("Polis: 122"), leading: Icon(Icons.local_police)),
-              ListTile(title: Text("İtfaiye: 123"), leading: Icon(Icons.fire_truck)),
-              ListTile(title: Text("Ambulans: 124"), leading: Icon(Icons.medical_services)),
-            ],
+          Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: const ExpansionTile(
+              leading: Icon(Icons.warning_amber_rounded, color: Colors.red),
+              title: Text("🚨 Acil Durum Numaraları", style: TextStyle(fontWeight: FontWeight.bold)),
+              children: [
+                ListTile(title: Text("Polis"), subtitle: Text("122")),
+                ListTile(title: Text("İtfaiye"), subtitle: Text("123")),
+                ListTile(title: Text("Ambulans"), subtitle: Text("124")),
+              ],
+            ),
           ),
-          ExpansionTile(
-            title: Text("🚕 Taksi Durakları", style: TextStyle(fontWeight: FontWeight.bold)),
-            children: [
-              ListTile(title: Text("Naš Taxi"), subtitle: Text("Podgorica yerel taksi servisi"), leading: Icon(Icons.local_taxi)),
-              ListTile(title: Text("Peugeot Taxi"), subtitle: Text("Popüler taksi seçeneği"), leading: Icon(Icons.local_taxi)),
-            ],
+          Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: const ExpansionTile(
+              leading: Icon(Icons.local_taxi, color: Colors.orange),
+              title: Text("🚕 Taksi Durakları", style: TextStyle(fontWeight: FontWeight.bold)),
+              children: [
+                ListTile(title: Text("Naš Taxi"), subtitle: Text("Podgorica yerel taksi servisi")),
+                ListTile(title: Text("Peugeot Taxi"), subtitle: Text("Popüler taksi seçeneği")),
+              ],
+            ),
           ),
-          ExpansionTile(
-            title: Text("📱 eSIM & İnternet", style: TextStyle(fontWeight: FontWeight.bold)),
-            children: [
-              ListTile(title: Text("One Montenegro (eSIM)"), leading: Icon(Icons.sim_card), onTap: () => _launchURL("https://www.me.one/")),
-            ],
+          Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: ExpansionTile(
+              leading: const Icon(Icons.sim_card, color: Colors.blue),
+              title: const Text("📱 eSIM & İnternet", style: TextStyle(fontWeight: FontWeight.bold)),
+              children: [
+                ListTile(
+                  title: const Text("One Montenegro (eSIM)"),
+                  subtitle: const Text("Resmi web sitesini ziyaret et"),
+                  trailing: const Icon(Icons.open_in_new, size: 18),
+                  onTap: () => _launchURL("https://www.me.one/"),
+                ),
+              ],
+            ),
           ),
         ],
       ),
