@@ -28,8 +28,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
-    const PlacesScreen(),
-    const Center(child: Text("Restoranlar Yakında Eklenecek")),
+    const Center(child: Text("Gezilecek Yerler Yakında")),
+    const Center(child: Text("Restoranlar Yakında")),
     const ServicesScreen(),
   ];
 
@@ -43,23 +43,9 @@ class _MainScreenState extends State<MainScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.place), label: 'Gezilecek'),
           BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: 'Yemek'),
-          BottomNavigationBarItem(icon: Icon(Icons.build), label: 'Hizmetler'),
+          BottomNavigationBarItem(icon: Icon(Icons.hotel), label: 'Hizmetler'),
         ],
       ),
-    );
-  }
-}
-
-class PlacesScreen extends StatelessWidget {
-  const PlacesScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Gezilecek Yerler')),
-      body: ListView(children: const [
-        ListTile(title: Text("Skadar Gölü"), subtitle: Text("Balkanların En Büyüğü")),
-        ListTile(title: Text("Kotor Körfezi"), subtitle: Text("UNESCO Mirası")),
-      ]),
     );
   }
 }
@@ -75,19 +61,18 @@ class ServicesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Araç & Konaklama')),
+      appBar: AppBar(title: const Text('Hizmetler & Konaklama')),
       body: ListView(
         children: [
-          ListTile(
-            leading: const Icon(Icons.directions_car, color: Colors.red),
-            title: const Text("Araç Kiralama (LocalRent)"),
-            onTap: () => _launchURL("https://localrent.com/me/"),
-          ),
-          ListTile(
-            leading: const Icon(Icons.home, color: Colors.red),
-            title: const Text("Konaklama (Booking.com)"),
-            onTap: () => _launchURL("https://www.booking.com/city/me/podgorica.tr.html"),
-          ),
+          const ListTile(title: Text("--- ARAÇ KİRALAMA ---", style: TextStyle(fontWeight: FontWeight.bold))),
+          ListTile(leading: const Icon(Icons.directions_car), title: const Text("LocalRent"), onTap: () => _launchURL("https://localrent.com/me/")),
+          
+          const Divider(),
+          
+          const ListTile(title: Text("--- YÜKSEK PUANLI OTELLER ---", style: TextStyle(fontWeight: FontWeight.bold))),
+          ListTile(leading: const Icon(Icons.hotel), title: const Text("Regent Porto Montenegro (Tivat)"), onTap: () => _launchURL("https://www.booking.com/hotel/me/regent-porto-montenegro.tr.html")),
+          ListTile(leading: const Icon(Icons.hotel), title: const Text("Aman Sveti Stefan"), onTap: () => _launchURL("https://www.booking.com/hotel/me/aman-sveti-stefan.tr.html")),
+          ListTile(leading: const Icon(Icons.hotel), title: const Text("Hotel Splendid (Bečići)"), onTap: () => _launchURL("https://www.booking.com/hotel/me/splendid-conference-spa-resort.tr.html")),
         ],
       ),
     );
