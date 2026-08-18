@@ -30,6 +30,9 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   final List<Place> places = const [
+    Place(title: 'Kolašin Kayak Merkezi', subtitle: 'Kış Turizmi ve Kayak', description: 'Bjelasica Dağı eteklerinde yer alan, modern pistleri ve kar kalitesiyle ünlü kayak merkezi.'),
+    Place(title: 'Ostrog Manastırı', subtitle: 'Kutsal Hac Merkezi', description: 'Dikey bir kayanın içine oyulmuş, dağın zirvesinde mucizevi duruşuyla dünyaca ünlü Sırp Ortodoks manastırı.'),
+    Place(title: 'Morača Manastırı', subtitle: 'Tarihi Manastır', description: 'Morača Nehri kanyonu yanında yer alan, 13. yüzyıldan kalma değerli freskleri ve mimarisiyle öne çıkan yapı.'),
     Place(title: 'Kotor Teleferiği', subtitle: 'Muhteşem Manzara', description: 'Körfezi kuş bakışı izleyebileceğiniz modern teleferik hattı.'),
     Place(title: 'Eski Bar (Stari Bar)', subtitle: 'Tarihi Kalıntılar', description: 'Zeytin ağaçları arasında, surlarla çevrili büyüleyici antik kent.'),
     Place(title: 'Sutomore', subtitle: 'Sahil Kasabası', description: 'Geniş plajları ve hareketli atmosferiyle sevilen kıyı bölgesi.'),
