@@ -8,17 +8,16 @@ class MontenegroApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner: false,
-    theme: ThemeData(primarySwatch: Colors.red),
+    theme: ThemeData(primarySwatch: Colors.red, useMaterial3: true),
     home: const MainDashboard(),
   );
 }
 
 class MainDashboard extends StatelessWidget {
   const MainDashboard({super.key});
-
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Karadağ Rehberi')),
+    appBar: AppBar(title: const Text('Karadağ Rehberim', style: TextStyle(fontWeight: FontWeight.bold))),
     body: GridView.count(crossAxisCount: 2, padding: const EdgeInsets.all(12), children: [
       _buildMenu(context, "Gezilecek Yerler", Icons.landscape, Colors.green, const PlacesScreen()),
       _buildMenu(context, "Restoranlar", Icons.restaurant, Colors.orange, const RestaurantsScreen()),
@@ -27,11 +26,10 @@ class MainDashboard extends StatelessWidget {
 
   Widget _buildMenu(context, title, icon, color, page) => Card(
     child: InkWell(onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => page)),
-    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(icon, size: 40, color: color), Text(title)]),
+    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(icon, size: 40, color: color), const SizedBox(height: 8), Text(title, style: const TextStyle(fontWeight: FontWeight.bold))]),
   ));
 }
 
-// Harita Destekli Sayfalar
 class PlacesScreen extends StatelessWidget {
   const PlacesScreen({super.key});
   final List places = const [
@@ -43,10 +41,9 @@ class PlacesScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text("Gezilecek Yerler")),
     body: ListView.builder(itemCount: places.length, itemBuilder: (context, i) => _buildCard(places[i])));
 
-  Widget _buildCard(item) => Card(margin: const EdgeInsets.all(10), child: Column(children: [
-    Image.network(item['img'], height: 150, width: double.infinity, fit: BoxFit.cover),
-    ListTile(title: Text(item['name']), subtitle: Text(item['desc']),
-    trailing: IconButton(icon: const Icon(Icons.map, color: Colors.red), 
+  Widget _buildCard(item) => Card(margin: const EdgeInsets.all(10), clipBehavior: Clip.antiAlias, child: Column(children: [
+    Image.network(item['img'], height: 180, width: double.infinity, fit: BoxFit.cover),
+    ListTile(title: Text(item['name']), subtitle: Text(item['desc']), trailing: IconButton(icon: const Icon(Icons.map, color: Colors.red), 
     onPressed: () => launchUrl(Uri.parse("https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent(item['name'])}"), mode: LaunchMode.externalApplication)))
   ]));
 }
@@ -54,17 +51,16 @@ class PlacesScreen extends StatelessWidget {
 class RestaurantsScreen extends StatelessWidget {
   const RestaurantsScreen({super.key});
   final List rests = const [
-    {"name": "Niagara Restoran", "desc": "Şelale kenarı.", "img": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/46/f1/3e/restoran-niagara.jpg?w=600&h=-1&s=1"},
+    {"name": "Niagara Restoran", "desc": "Şelale kenarında keyif.", "img": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/46/f1/3e/restoran-niagara.jpg?w=600&h=-1&s=1"},
   ];
 
   @override
   Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text("Restoranlar")),
     body: ListView.builder(itemCount: rests.length, itemBuilder: (context, i) => _buildCard(rests[i])));
 
-  Widget _buildCard(item) => Card(margin: const EdgeInsets.all(10), child: Column(children: [
-    Image.network(item['img'], height: 150, width: double.infinity, fit: BoxFit.cover),
-    ListTile(title: Text(item['name']), subtitle: Text(item['desc']),
-    trailing: IconButton(icon: const Icon(Icons.map, color: Colors.red), 
+  Widget _buildCard(item) => Card(margin: const EdgeInsets.all(10), clipBehavior: Clip.antiAlias, child: Column(children: [
+    Image.network(item['img'], height: 180, width: double.infinity, fit: BoxFit.cover),
+    ListTile(title: Text(item['name']), subtitle: Text(item['desc']), trailing: IconButton(icon: const Icon(Icons.map, color: Colors.red), 
     onPressed: () => launchUrl(Uri.parse("https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent(item['name'])}"), mode: LaunchMode.externalApplication)))
   ]));
 }
