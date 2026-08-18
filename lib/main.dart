@@ -47,6 +47,7 @@ class MainDashboard extends StatelessWidget {
             _buildMenuCard(context, "Gezilecek Yerler", Icons.place, Colors.blue, const PlacesScreen()),
             _buildMenuCard(context, "Hizmetler & Oteller", Icons.hotel, Colors.green, const ServicesScreen()),
             _buildMenuCard(context, "Pratik Bilgiler", Icons.info_outline, Colors.purple, const PracticalInfoScreen()),
+            _buildMenuCard(context, "Ulaşım & Trafik", Icons.directions_car, Colors.teal, const TransportScreen()),
           ],
         ),
       ),
@@ -73,7 +74,7 @@ class MainDashboard extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               textAlign: TextAlign.center,
             ),
           ],
@@ -87,25 +88,75 @@ class MainDashboard extends StatelessWidget {
 class PlacesScreen extends StatelessWidget {
   const PlacesScreen({super.key});
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Gezilecek Yerler')), body: const Center(child: Text("Bölge listeleri yakında aktif.")));
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Gezilecek Yerler')), body: const Center(child: Text("Bölge listeleri aktif.")));
 }
 
 class RestaurantsScreen extends StatelessWidget {
   const RestaurantsScreen({super.key});
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Restoranlar')), body: const Center(child: Text("Restoranlar listesi yakında aktif.")));
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Restoranlar')), body: const Center(child: Text("Restoranlar listesi aktif.")));
 }
 
 class ServicesScreen extends StatelessWidget {
   const ServicesScreen({super.key});
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Hizmetler & Oteller')), body: const Center(child: Text("Hizmetler listesi yakında aktif.")));
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Hizmetler & Oteller')), body: const Center(child: Text("Hizmetler listesi aktif.")));
 }
 
 class EmbassyScreen extends StatelessWidget {
   const EmbassyScreen({super.key});
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Konsolosluklar')), body: const Center(child: Text("Konsolosluklar listesi yakında aktif.")));
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Konsolosluklar')), body: const Center(child: Text("Konsolosluklar listesi aktif.")));
+}
+
+// ---------------- ULAŞIM & TRAFİK SAYFASI (YENİ) ----------------
+class TransportScreen extends StatelessWidget {
+  const TransportScreen({super.key});
+
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) await launchUrl(uri, mode: LaunchMode.externalApplication);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Ulaşım & Trafik Kuralları')),
+      body: ListView(
+        padding: const EdgeInsets.all(12),
+        children: [
+          Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: const ExpansionTile(
+              leading: Icon(Icons.speed, color: Colors.teal),
+              title: Text("🚗 Önemli Trafik Kuralları", style: TextStyle(fontWeight: FontWeight.bold)),
+              children: [
+                ListTile(title: Text("Farlar: Gündüzleri de kısa farlar açık olmalıdır.")),
+                ListTile(title: Text("Alkol Sınırı: 0.03 promil (Neredeyse sıfır tolerans).")),
+                ListTile(title: Text("Emniyet Kemeri: Ön ve arka koltuklarda zorunludur.")),
+                ListTile(title: Text("Hız Sınırları: Yerleşim yerinde 50 km/s, şehir dışında genelde 80 km/s.")),
+              ],
+            ),
+          ),
+          Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: ExpansionTile(
+              leading: const Icon(Icons.directions_bus, color: Colors.blue),
+              title: const Text("🚌 Otobüs & Tren Seferleri", style: TextStyle(fontWeight: FontWeight.bold)),
+              children: [
+                ListTile(
+                  title: const Text("Podgorica Otogarı (Autobuska Stanica)"),
+                  subtitle: const Text("Sefer saatleri ve bilet bilgileri"),
+                  trailing: const Icon(Icons.open_in_new, size: 18),
+                  onTap: () => _launchURL("https://busticket4.me/"),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 // ---------------- PRATİK BİLGİLER ----------------
