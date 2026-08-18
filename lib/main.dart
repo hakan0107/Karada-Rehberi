@@ -29,7 +29,8 @@ class MainDashboard extends StatelessWidget {
           _buildMenuCard(context, "Konsolosluklar", Icons.flag, Colors.indigo, null),
           _buildMenuCard(context, "Restoranlar", Icons.restaurant, Colors.orange, null),
           _buildMenuCard(context, "Gezilecek Yerler", Icons.place, Colors.blue, null),
-          _buildMenuCard(context, "Hizmetler & Konaklama", Icons.hotel, Colors.green, const ServicesScreen()),
+          _buildMenuCard(context, "Hizmetler & Konaklama", Icons.hotel, Colors.green, null),
+          _buildMenuCard(context, "Pratik Bilgiler", Icons.info_outline, Colors.purple, const PracticalInfoScreen()),
         ],
       ),
     );
@@ -55,8 +56,8 @@ class MainDashboard extends StatelessWidget {
   }
 }
 
-class ServicesScreen extends StatelessWidget {
-  const ServicesScreen({super.key});
+class PracticalInfoScreen extends StatelessWidget {
+  const PracticalInfoScreen({super.key});
 
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
@@ -66,58 +67,66 @@ class ServicesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Araç Kiralama & Konaklama')),
+      appBar: AppBar(title: const Text('Pratik Bilgiler & Acil Durum')),
       body: ListView(
         children: [
+          const ExpansionTile(
+            title: Text("🚨 Acil Durum Numaraları", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+            children: [
+              ListTile(title: Text("Polis"), subtitle: Text("122"), trailing: Icon(Icons.phone, color: Colors.green)),
+              ListTile(title: Text("İtfaiye"), subtitle: Text("123"), trailing: Icon(Icons.phone, color: Colors.green)),
+              ListTile(title: Text("Ambulans / Acil Sağlık"), subtitle: Text("124"), trailing: Icon(Icons.phone, color: Colors.green)),
+              ListTile(title: Text("Yol Yardım & Çekici (AMSCG)"), subtitle: Text("19807"), trailing: Icon(Icons.phone, color: Colors.green)),
+            ],
+          ),
           ExpansionTile(
-            title: const Text("🚗 Araç Kiralama Firmaları", style: TextStyle(fontWeight: FontWeight.bold)),
+            title: const Text("🚕 Taksi & Transfer", style: TextStyle(fontWeight: FontWeight.bold)),
             children: [
               ListTile(
-                title: const Text("Montenegro Car"),
-                subtitle: const Text("Ülkenin en köklü yerel araç kiralama firması"),
+                title: const Text("Tesla Go App"),
+                subtitle: const Text("Elektrikli araç taksi servisi"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () => _launchURL("https://www.montenegrocar.me/"),
+                onTap: () => _launchURL("https://www.teslago.me/"),
               ),
               ListTile(
-                title: const Text("Sixt Rent a Car Montenegro"),
-                subtitle: const Text("Uluslararası güvenilir küresel marka"),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () => _launchURL("https://www.sixt.me/"),
-              ),
-              ListTile(
-                title: const Text("LocalRent"),
-                subtitle: const Text("Yerel acenteleri karşılaştırma platformu"),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () => _launchURL("https://localrent.com/me/"),
-              ),
-              ListTile(
-                title: const Text("Méga Rent a Car"),
-                subtitle: const Text("Podgorica ve Budva ofisleri"),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () => _launchURL("https://megarentacar.com/"),
-              ),
-              ListTile(
-                title: const Text("Green Motion Montenegro"),
-                subtitle: const Text("Havalimanı teslimatlı global firma"),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () => _launchURL("https://www.greenmotion.com/"),
+                title: const Text("Red Taxi Podgorica"),
+                subtitle: const Text("Popüler şehir içi durak"),
+                trailing: const Icon(Icons.phone, color: Colors.green),
+                onTap: () => _launchURL("tel:+38219988"),
               ),
             ],
           ),
           ExpansionTile(
-            title: const Text("🏠 Konaklama & Airbnb", style: TextStyle(fontWeight: FontWeight.bold)),
+            title: const Text("⛽ Akaryakıt İstasyonları", style: TextStyle(fontWeight: FontWeight.bold)),
             children: [
               ListTile(
-                title: const Text("Airbnb Montenegro"),
-                subtitle: const Text("Ev ve villa kiralama seçenekleri"),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () => _launchURL("https://www.airbnb.com.tr/montenegro/stays"),
+                title: const Text("Jugopetrol (EKO)"),
+                subtitle: const Text("Ülke geneli yaygın istasyonlar"),
+                trailing: const Icon(Icons.map, color: Colors.red),
+                onTap: () => _launchURL("https://www.google.com/maps/search/Jugopetrol+Montenegro"),
               ),
               ListTile(
-                title: const Text("Booking.com Podgorica & Kıyı"),
-                subtitle: const Text("Otel ve apart seçenekleri"),
+                title: const Text("Ina Montenegro"),
+                subtitle: const Text("Kaliteli akaryakıt noktaları"),
+                trailing: const Icon(Icons.map, color: Colors.red),
+                onTap: () => _launchURL("https://www.google.com/maps/search/INA+gas+station+Montenegro"),
+              ),
+            ],
+          ),
+          ExpansionTile(
+            title: const Text("📱 Mobil İnternet & eSIM", style: TextStyle(fontWeight: FontWeight.bold)),
+            children: [
+              ListTile(
+                title: const Text("Airalo eSIM (Karadağ)"),
+                subtitle: const Text("Dijital internet paketleri"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () => _launchURL("https://www.booking.com/country/me.tr.html"),
+                onTap: () => _launchURL("https://www.airalo.com/montenegro-esim"),
+              ),
+              ListTile(
+                title: const Text("m:tel Montenegro"),
+                subtitle: const Text("Yerel turist SIM kart seçenekleri"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () => _launchURL("https://mtel.me/"),
               ),
             ],
           ),
