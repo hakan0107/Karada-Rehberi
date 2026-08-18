@@ -8,43 +8,83 @@ class MontenegroApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner: false,
-    theme: ThemeData(primarySwatch: Colors.red, useMaterial3: true),
+    theme: ThemeData(
+      primarySwatch: Colors.indigo,
+      useMaterial3: true,
+      cardTheme: CardTheme(elevation: 4, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+    ),
     home: const MainDashboard(),
   );
 }
 
 class MainDashboard extends StatelessWidget {
   const MainDashboard({super.key});
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Karadağ Rehberim', style: TextStyle(fontWeight: FontWeight.bold))),
-    body: GridView.count(crossAxisCount: 2, padding: const EdgeInsets.all(12), children: [
-      _buildMenu(context, "Gezilecek Yerler", Icons.landscape, Colors.green, const PlacesScreen()),
-      _buildMenu(context, "Restoranlar", Icons.restaurant, Colors.orange, const RestaurantsScreen()),
-    ]),
-  );
 
-  Widget _buildMenu(context, title, icon, color, page) => Card(
-    child: InkWell(onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => page)),
-    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(icon, size: 40, color: color), const SizedBox(height: 8), Text(title, style: const TextStyle(fontWeight: FontWeight.bold))]),
-  ));
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Montenegro Guide', style: TextStyle(fontWeight: FontWeight.bold)),
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.language))],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              width: double.infinity,
+              decoration: const BoxDecoration(color: Colors.indigo, borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
+              child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text("Hoş Geldiniz", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+                Text("Karadağ'ı keşfetmeye hazır mısınız?", style: TextStyle(color: Colors.white70)),
+              ]),
+            ),
+            GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              padding: const EdgeInsets.all(16),
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              children: [
+                _buildCard(context, "Gezilecek Yerler", Icons.landscape, Colors.green, const PlacesScreen()),
+                _buildCard(context, "Restoranlar", Icons.restaurant, Colors.orange, const RestaurantsScreen()),
+                _buildCard(context, "Pratik Bilgiler", Icons.info_outline, Colors.blue, const Placeholder()),
+                _buildCard(context, "Trafik Kuralları", Icons.speed, Colors.red, const Placeholder()),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCard(context, title, icon, color, page) => InkWell(
+    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => page)),
+    child: Card(
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Icon(icon, size: 48, color: color),
+        const SizedBox(height: 10),
+        Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+      ]),
+    ),
+  );
 }
 
 class PlacesScreen extends StatelessWidget {
   const PlacesScreen({super.key});
   final List places = const [
-    {"name": "Kotor Körfezi", "desc": "Tarihi ve deniz.", "img": "https://images.unsplash.com/photo-1596489373752-d55883833d7b?q=80&w=600"},
-    {"name": "Ostrog Manastırı", "desc": "Kayalara oyulmuş.", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Ostrog_monastery_Montenegro.jpg/600px-Ostrog_monastery_Montenegro.jpg"},
+    {"name": "Kotor Körfezi", "desc": "UNESCO Dünya Mirası.", "img": "https://images.unsplash.com/photo-1596489373752-d55883833d7b?q=80&w=600"},
+    {"name": "Ostrog Manastırı", "desc": "Kayalara oyulmuş mucize.", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Ostrog_monastery_Montenegro.jpg/600px-Ostrog_monastery_Montenegro.jpg"},
   ];
 
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text("Gezilecek Yerler")),
-    body: ListView.builder(itemCount: places.length, itemBuilder: (context, i) => _buildCard(places[i])));
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text("Gezilecek Yerler")), 
+    body: ListView.builder(itemCount: places.length, itemBuilder: (context, i) => _buildItem(places[i])));
 
-  Widget _buildCard(item) => Card(margin: const EdgeInsets.all(10), clipBehavior: Clip.antiAlias, child: Column(children: [
-    Image.network(item['img'], height: 180, width: double.infinity, fit: BoxFit.cover),
-    ListTile(title: Text(item['name']), subtitle: Text(item['desc']), trailing: IconButton(icon: const Icon(Icons.map, color: Colors.red), 
-    onPressed: () => launchUrl(Uri.parse("https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent(item['name'])}"), mode: LaunchMode.externalApplication)))
+  Widget _buildItem(item) => Card(margin: const EdgeInsets.all(12), child: Column(children: [
+    Image.network(item['img'], height: 200, width: double.infinity, fit: BoxFit.cover),
+    ListTile(title: Text(item['name']), subtitle: Text(item['desc']), trailing: const Icon(Icons.map, color: Colors.indigo))
   ]));
 }
 
@@ -56,11 +96,10 @@ class RestaurantsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text("Restoranlar")),
-    body: ListView.builder(itemCount: rests.length, itemBuilder: (context, i) => _buildCard(rests[i])));
+    body: ListView.builder(itemCount: rests.length, itemBuilder: (context, i) => _buildItem(rests[i])));
 
-  Widget _buildCard(item) => Card(margin: const EdgeInsets.all(10), clipBehavior: Clip.antiAlias, child: Column(children: [
-    Image.network(item['img'], height: 180, width: double.infinity, fit: BoxFit.cover),
-    ListTile(title: Text(item['name']), subtitle: Text(item['desc']), trailing: IconButton(icon: const Icon(Icons.map, color: Colors.red), 
-    onPressed: () => launchUrl(Uri.parse("https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent(item['name'])}"), mode: LaunchMode.externalApplication)))
+  Widget _buildItem(item) => Card(margin: const EdgeInsets.all(12), child: Column(children: [
+    Image.network(item['img'], height: 200, width: double.infinity, fit: BoxFit.cover),
+    ListTile(title: Text(item['name']), subtitle: Text(item['desc']), trailing: const Icon(Icons.map, color: Colors.indigo))
   ]));
 }
