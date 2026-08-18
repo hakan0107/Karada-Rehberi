@@ -14,38 +14,7 @@ class MontenegroGuideApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Montenegro Travel',
       theme: ThemeData(primarySwatch: Colors.red),
-      home: const MainScreen(),
-    );
-  }
-}
-
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
-  final List<Widget> _pages = [
-    const Center(child: Text("Gezilecek Yerler Yakında")),
-    const Center(child: Text("Restoranlar Yakında")),
-    const ServicesScreen(),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: (index) => setState(() => _selectedIndex = index),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.place), label: 'Gezilecek'),
-          BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: 'Yemek'),
-          BottomNavigationBarItem(icon: Icon(Icons.hotel), label: 'Hizmetler'),
-        ],
-      ),
+      home: const ServicesScreen(),
     );
   }
 }
@@ -61,20 +30,40 @@ class ServicesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Hizmetler & Konaklama')),
+      appBar: AppBar(title: const Text('Şehir Bazlı Oteller')),
       body: ListView(
         children: [
-          const ListTile(title: Text("--- ARAÇ KİRALAMA ---", style: TextStyle(fontWeight: FontWeight.bold))),
-          ListTile(leading: const Icon(Icons.directions_car), title: const Text("LocalRent"), onTap: () => _launchURL("https://localrent.com/me/")),
-          
-          const Divider(),
-          
-          const ListTile(title: Text("--- YÜKSEK PUANLI OTELLER ---", style: TextStyle(fontWeight: FontWeight.bold))),
-          ListTile(leading: const Icon(Icons.hotel), title: const Text("Regent Porto Montenegro (Tivat)"), onTap: () => _launchURL("https://www.booking.com/hotel/me/regent-porto-montenegro.tr.html")),
-          ListTile(leading: const Icon(Icons.hotel), title: const Text("Aman Sveti Stefan"), onTap: () => _launchURL("https://www.booking.com/hotel/me/aman-sveti-stefan.tr.html")),
-          ListTile(leading: const Icon(Icons.hotel), title: const Text("Hotel Splendid (Bečići)"), onTap: () => _launchURL("https://www.booking.com/hotel/me/splendid-conference-spa-resort.tr.html")),
+          _buildCitySection("Podgorica", "https://www.booking.com/city/me/podgorica.tr.html", [
+            {"name": "Hotel Hemera", "url": "https://www.booking.com/hotel/me/hemera.tr.html"},
+            {"name": "Hilton Podgorica Crna Gora", "url": "https://www.booking.com/hotel/me/hilton-podgorica-crna-gora.tr.html"},
+          ]),
+          _buildCitySection("Budva", "https://www.booking.com/city/me/budva.tr.html", [
+            {"name": "Avala Resort & Villas", "url": "https://www.booking.com/hotel/me/avala-resort-villas.tr.html"},
+            {"name": "Hotel Splendid (Bečići)", "url": "https://www.booking.com/hotel/me/splendid-conference-spa-resort.tr.html"},
+          ]),
+          _buildCitySection("Kotor", "https://www.booking.com/city/me/kotor.tr.html", [
+            {"name": "Hotel Vardar", "url": "https://www.booking.com/hotel/me/hotel-vardar.tr.html"},
+            {"name": "Forza Terra", "url": "https://www.booking.com/hotel/me/forza-terra.tr.html"},
+          ]),
+          _buildCitySection("Bar", "https://www.booking.com/city/me/bar.tr.html", [
+            {"name": "Hotel Princess", "url": "https://www.booking.com/hotel/me/hotel-princess-bar.tr.html"},
+          ]),
+          _buildCitySection("Herceg Novi", "https://www.booking.com/city/me/herceg-novi.tr.html", [
+            {"name": "Lazure Hotel & Marina", "url": "https://www.booking.com/hotel/me/lazure-hotel-marina.tr.html"},
+            {"name": "Hotel Palmon Bay", "url": "https://www.booking.com/hotel/me/palmon-bay-hotel-spa.tr.html"},
+          ]),
         ],
       ),
+    );
+  }
+
+  Widget _buildCitySection(String city, String cityUrl, List<Map<String, String>> hotels) {
+    return ExpansionTile(
+      title: Text(city, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+      children: [
+        ListTile(title: const Text("Tüm Otelleri Gör"), leading: const Icon(Icons.list), onTap: () => _launchURL(cityUrl)),
+        ...hotels.map((h) => ListTile(title: Text(h['name']!), leading: const Icon(Icons.hotel), onTap: () => _launchURL(h['url']!))),
+      ],
     );
   }
 }
