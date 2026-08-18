@@ -26,10 +26,10 @@ class MainDashboard extends StatelessWidget {
         crossAxisCount: 2,
         padding: const EdgeInsets.all(16),
         children: [
-          _buildMenuCard(context, "Konsolosluklar", Icons.flag, Colors.indigo, const EmbassyScreen()),
-          _buildMenuCard(context, "Restoranlar", Icons.restaurant, Colors.orange, const RestaurantsScreen()),
+          _buildMenuCard(context, "Konsolosluklar", Icons.flag, Colors.indigo, null),
+          _buildMenuCard(context, "Restoranlar", Icons.restaurant, Colors.orange, null),
           _buildMenuCard(context, "Gezilecek Yerler", Icons.place, Colors.blue, null),
-          _buildMenuCard(context, "Hizmetler & Oteller", Icons.hotel, Colors.green, null),
+          _buildMenuCard(context, "Hizmetler & Konaklama", Icons.hotel, Colors.green, const ServicesScreen()),
         ],
       ),
     );
@@ -55,8 +55,8 @@ class MainDashboard extends StatelessWidget {
   }
 }
 
-class RestaurantsScreen extends StatelessWidget {
-  const RestaurantsScreen({super.key});
+class ServicesScreen extends StatelessWidget {
+  const ServicesScreen({super.key});
 
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
@@ -66,38 +66,57 @@ class RestaurantsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Restoranlar')),
+      appBar: AppBar(title: const Text('Araç Kiralama & Konaklama')),
       body: ListView(
         children: [
-          _buildCitySection("Podgorica", [
-            {"name": "Stara Kuća", "rating": "4.7 ★", "desc": "Geleneksel yapı ve lezzet.", "map": "https://www.google.com/maps/search/Stara+Kuca+Podgorica"},
-            {"name": "Salaš 23", "rating": "4.8 ★", "desc": "Otantik köy mutfağı.", "map": "https://www.google.com/maps/search/Salas+23+Podgorica"},
-            {"name": "Djedovina", "rating": "4.7 ★", "desc": "Atalarımızın tarifleri.", "map": "https://www.google.com/maps/search/Djedovina+Podgorica"},
-          ]),
-          _buildCitySection("Kotor", [
-            {"name": "Stari Mlini", "rating": "4.8 ★", "desc": "Tarihi su değirmeni.", "map": "https://www.google.com/maps/search/Stari+Mlini+Kotor"},
-          ]),
+          const ExpansionTile(
+            title: Text("🚗 Araç Kiralama Firmaları", style: TextStyle(fontWeight: FontWeight.bold)),
+            children: [
+              // Buraya rent a car firmaları eklenecek
+            ],
+          ),
+          ExpansionTile(
+            title: const Text("🚗 Araç Kiralama Firmaları", style: TextStyle(fontWeight: FontWeight.bold)),
+            children: [
+              ListTile(
+                title: const Text("LocalRent (Yerel & Güvenilir)"),
+                subtitle: const Text("Karadağ'ın en popüler araç kiralama platformu"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () => _launchURL("https://localrent.com/me/"),
+              ),
+              ListTile(
+                title: const Text("Méga Rent a Car"),
+                subtitle: const Text("Podgorica ve Budva ofisleri"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () => _launchURL("https://megarentacar.com/"),
+              ),
+              ListTile(
+                title: const Text("Green Motion Montenegro"),
+                subtitle: const Text("Havalimanı teslimatlı global firma"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () => _launchURL("https://www.greenmotion.com/"),
+              ),
+            ],
+          ),
+          ExpansionTile(
+            title: const Text("🏠 Konaklama & Airbnb", style: TextStyle(fontWeight: FontWeight.bold)),
+            children: [
+              ListTile(
+                title: const Text("Airbnb Montenegro"),
+                subtitle: const Text("Ev ve villa kiralama seçenekleri"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () => _launchURL("https://www.airbnb.com.tr/montenegro/stays"),
+              ),
+              ListTile(
+                title: const Text("Booking.com Podgorica & Kıyı"),
+                subtitle: const Text("Otel ve apart seçenekleri"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () => _launchURL("https://www.booking.com/country/me.tr.html"),
+              ),
+            ],
+          ),
         ],
       ),
     );
-  }
-
-  Widget _buildCitySection(String city, List<Map<String, String>> restaurants) {
-    return ExpansionTile(
-      title: Text(city, style: const TextStyle(fontWeight: FontWeight.bold)),
-      children: restaurants.map((r) => ListTile(
-        title: Text(r['name']!),
-        subtitle: Text("${r['rating']} - ${r['desc']}"),
-        trailing: IconButton(icon: const Icon(Icons.map, color: Colors.red), onPressed: () => _launchURL(r['map']!)),
-      )).toList(),
-    );
-  }
-}
-
-class EmbassyScreen extends StatelessWidget {
-  const EmbassyScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text('Konsolosluklar')), body: const Center(child: Text("Elçilik bilgileri yüklenecek...")));
   }
 }
