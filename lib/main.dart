@@ -29,7 +29,7 @@ class MainDashboard extends StatelessWidget {
           _buildMenuCard(context, "Konsolosluklar", Icons.flag, Colors.indigo, const EmbassyScreen()),
           _buildMenuCard(context, "Restoranlar", Icons.restaurant, Colors.orange, const RestaurantsScreen()),
           _buildMenuCard(context, "Gezilecek Yerler", Icons.place, Colors.blue, null),
-          _buildMenuCard(context, "Hizmetler & Oteller", Icons.build, Colors.green, null),
+          _buildMenuCard(context, "Hizmetler & Oteller", Icons.hotel, Colors.green, null),
         ],
       ),
     );
@@ -43,7 +43,7 @@ class MainDashboard extends StatelessWidget {
           if (page != null) {
             Navigator.push(context, MaterialPageRoute(builder: (context) => page));
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("$title yapım aşamasında!")));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("$title yakında aktif!")));
           }
         },
         child: Column(
@@ -52,16 +52,6 @@ class MainDashboard extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class EmbassyScreen extends StatelessWidget {
-  const EmbassyScreen({super.key});
-  // ... (Önceki elçilik listesi)
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text('Konsolosluklar')), body: const Center(child: Text("Elçilikler Listesi"))); 
-    // Not: Kod çok uzamasın diye diğer bölümlerdeki uzun listeleri bir sonraki adımda tam dosya olarak vereceğim.
   }
 }
 
@@ -76,21 +66,16 @@ class RestaurantsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Yüksek Puanlı Restoranlar')),
+      appBar: AppBar(title: const Text('Restoranlar')),
       body: ListView(
         children: [
           _buildCitySection("Podgorica", [
-            {"name": "Restoran Niagara", "rating": "4.8 ★", "desc": "Şelale manzaralı et ve balık restoranı.", "map": "https://www.google.com/maps/search/Restoran+Niagara+Podgorica"},
-            {"name": "Pod Volat", "rating": "4.6 ★", "desc": "Geleneksel Balkan mutfağı ve cevapcici.", "map": "https://www.google.com/maps/search/Pod+Volat+Podgorica"},
-            {"name": "Hemera Restaurant", "rating": "4.7 ★", "desc": "Şık atmosfer, uluslararası mutfak.", "map": "https://www.google.com/maps/search/Hemera+Restaurant+Podgorica"},
+            {"name": "Stara Kuća", "rating": "4.7 ★", "desc": "Geleneksel yapı ve lezzet.", "map": "https://www.google.com/maps/search/Stara+Kuca+Podgorica"},
+            {"name": "Salaš 23", "rating": "4.8 ★", "desc": "Otantik köy mutfağı.", "map": "https://www.google.com/maps/search/Salas+23+Podgorica"},
+            {"name": "Djedovina", "rating": "4.7 ★", "desc": "Atalarımızın tarifleri.", "map": "https://www.google.com/maps/search/Djedovina+Podgorica"},
           ]),
           _buildCitySection("Kotor", [
-            {"name": "Stari Mlini", "rating": "4.8 ★", "desc": "Tarihi su değirmeninde eşsiz deniz ürünleri.", "map": "https://www.google.com/maps/search/Stari+Mlini+Kotor"},
-            {"name": "Galion", "rating": "4.7 ★", "desc": "Körfez manzaralı romantik balık restoranı.", "map": "https://www.google.com/maps/search/Galion+Kotor"},
-          ]),
-          _buildCitySection("Budva", [
-            {"name": "Jadran Kod Krsta", "rating": "4.6 ★", "desc": "Sahilde meşhur deniz ürünleri restoranı.", "map": "https://www.google.com/maps/search/Jadran+Kod+Krsta+Budva"},
-            {"name": "Dvoriste by Jadranka", "rating": "4.8 ★", "desc": "Gizli bahçede özel Akdeniz lezzetleri.", "map": "https://www.google.com/maps/search/Dvoriste+by+Jadranka+Budva"},
+            {"name": "Stari Mlini", "rating": "4.8 ★", "desc": "Tarihi su değirmeni.", "map": "https://www.google.com/maps/search/Stari+Mlini+Kotor"},
           ]),
         ],
       ),
@@ -99,13 +84,20 @@ class RestaurantsScreen extends StatelessWidget {
 
   Widget _buildCitySection(String city, List<Map<String, String>> restaurants) {
     return ExpansionTile(
-      title: Text(city, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+      title: Text(city, style: const TextStyle(fontWeight: FontWeight.bold)),
       children: restaurants.map((r) => ListTile(
-        leading: const Icon(Icons.restaurant_menu, color: Colors.orange),
         title: Text(r['name']!),
         subtitle: Text("${r['rating']} - ${r['desc']}"),
         trailing: IconButton(icon: const Icon(Icons.map, color: Colors.red), onPressed: () => _launchURL(r['map']!)),
       )).toList(),
     );
+  }
+}
+
+class EmbassyScreen extends StatelessWidget {
+  const EmbassyScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: AppBar(title: const Text('Konsolosluklar')), body: const Center(child: Text("Elçilik bilgileri yüklenecek...")));
   }
 }
