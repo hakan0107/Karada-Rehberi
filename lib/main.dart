@@ -110,7 +110,7 @@ class GezilecekYerlerSayfasi extends StatelessWidget {
     GezilecekYer(
       baslik: 'Ostrog Manastırı',
       aciklama: 'Kayalıkların dik yamacına tamamen oyulmuş mucizevi Ortodoks manastırı.',
-      detayliAciklama: 'Zeta vadisinin yükseklerinde, neredeyse dikey bir kayalığın içine oyulmuş olan Ostrog Manastırı, hac merkezlerinden biridir.',
+      detayliAciklama: 'Zeta vadisinin yükseklerinde, neredeyse dikey bir kayalığın içine oyulmuş olan Ostrog Manastırı, önemli hac merkezlerinden biridir.',
       resimUrl: 'https://picsum.photos/id/1039/800/600',
       haritaUrl: 'https://maps.google.com/?q=Ostrog+Monastery',
     ),
@@ -127,6 +127,20 @@ class GezilecekYerlerSayfasi extends StatelessWidget {
       detayliAciklama: 'Karadağ\'ın kuzeyinde yer alan Durmitor Milli Parkı, 20\'den fazla zirvesi ve kanyonuyla ünlüdür.',
       resimUrl: 'https://picsum.photos/id/1057/800/600',
       haritaUrl: 'https://maps.google.com/?q=Durmitor+National+Park',
+    ),
+    GezilecekYer(
+      baslik: 'Sveti Stefan',
+      aciklama: 'Denizin içindeki adacığa bağlı tarihi taş evleriyle Karadağ\'ın simgesi.',
+      detayliAciklama: 'Eskiden bir balıkçı köyü olan, günümüzde ise lüks bir tatil beldesi ve ülkenin en ikonik kartpostal görüntüsüdür.',
+      resimUrl: 'https://picsum.photos/id/1069/800/600',
+      haritaUrl: 'https://maps.google.com/?q=Sveti+Stefan',
+    ),
+    GezilecekYer(
+      baslik: 'Biogradska Gora Millî Parkı',
+      aciklama: 'Avrupa\'nın kalan son yaşlı ormanlarından biri ve ortasında büyüleyici göl.',
+      detayliAciklama: 'Bjelasica dağlarında yer alan milli park, devasa ağaçları ve Biogradsko gölü ile doğa severlerin vazgeçilmezidir.',
+      resimUrl: 'https://picsum.photos/id/1074/800/600',
+      haritaUrl: 'https://maps.google.com/?q=Biogradska+Gora',
     ),
   ];
 
