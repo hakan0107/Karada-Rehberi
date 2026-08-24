@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-  runApp(const KaradaRehberiApp());
+  runApp(const MonteDiscoverApp());
 }
 
-class KaradaRehberiApp extends StatelessWidget {
-  const KaradaRehberiApp({super.key});
+class MonteDiscoverApp extends StatelessWidget {
+  const MonteDiscoverApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Montenegro Travel',
+      title: 'Monte Discover',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: true,
@@ -29,7 +29,21 @@ class AnaSayfa extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Montenegro Travel'),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade800,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(Icons.explore, color: Colors.white, size: 20),
+            ),
+            const SizedBox(width: 8),
+            const Text('Monte Discover', style: TextStyle(fontWeight: FontWeight.bold)),
+          ],
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -37,13 +51,32 @@ class AnaSayfa extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+            children: [
+            // Ana Ekran Logo / İkon Alanı
+            Center(
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.blue.shade200, width: 2),
+                ),
+                child: Icon(Icons.travel_explore, size: 64, color: Colors.blue.shade700),
+              ),
+            ),
+            const SizedBox(height: 20),
             const Text(
-              'Karadağ Keşif Rehberi',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              'Monte Discover',
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Colors.blueAccent),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 8),
+            const Text(
+              'Karadağ Keşif Rehberi',
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 40),
             ElevatedButton.icon(
               onPressed: () {
                 Navigator.push(
@@ -290,7 +323,6 @@ class RestoranlarSayfasi extends StatefulWidget {
 }
 
 class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
-  // Favori restoran isimlerini tutan set
   final Set<String> _favoriler = {};
 
   static const List<Restoran> restoranlar = [
@@ -480,7 +512,6 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
           IconButton(
             icon: const Icon(Icons.favorite, color: Colors.red),
             onPressed: () {
-              // Favoriler filtrelenmiş liste veya bilgilendirme gösterilebilir
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Favori sayınız: ${_favoriler.length}')),
               );
@@ -509,7 +540,6 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Restoran Fotoğrafı ve Üst Bilgiler
                   Stack(
                     children: [
                       Image.network(
@@ -682,7 +712,6 @@ class RestoranDetaySayfasi extends StatelessWidget {
                   Text(restoran.aciklama, style: const TextStyle(fontSize: 15, height: 1.5)),
                   const Divider(height: 30),
                   
-                  // Detay Bilgileri Listesi
                   ListTile(
                     leading: const Icon(Icons.euro, color: Colors.green),
                     title: const Text('Fiyat Seviyesi'),
@@ -712,7 +741,6 @@ class RestoranDetaySayfasi extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
 
-                  // Harita Butonu
                   ElevatedButton.icon(
                     onPressed: () => _haritayiAc(restoran.haritaUrl),
                     icon: const Icon(Icons.map),
