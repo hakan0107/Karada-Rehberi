@@ -252,13 +252,12 @@ class RestoranlarSayfasi extends StatelessWidget {
   const RestoranlarSayfasi({super.key});
 
   final List<Restoran> restoranlar = const [
-    // Podgorica
     Restoran(
       sehir: 'Podgorica',
       isim: 'Pod Volat',
       mutfak: 'Balkan & Karadağ Mutfağı',
       puan: '4.8 / 5.0',
-      aciklama: 'Podgorica\'nın kalbinde, geleneksel et yemekleri, ev yapımı ekmekleri ve muazzam porsiyonlarıyla en meşhur yerel restoran.',
+      aciklama: 'Podgorica\'nın kalbinde, geleneksel et yemekleri ve ev yapımı ekmekleriyle meşhur yerel restoran.',
       haritaUrl: 'https://maps.google.com/?q=Pod+Volat+Podgorica',
     ),
     Restoran(
@@ -266,25 +265,15 @@ class RestoranlarSayfasi extends StatelessWidget {
       isim: 'Restoran Carine',
       mutfak: 'Akdeniz & Balkan',
       puan: '4.7 / 5.0',
-      aciklama: 'Şık atmosferi, geniş zengin menüsü ve kusursuz servis kalitesiyle başkentin en popüler buluşma noktalarından biri.',
+      aciklama: 'Şık atmosferi ve zengin menüsüyle başkentin popüler buluşma noktalarından biri.',
       haritaUrl: 'https://maps.google.com/?q=Restoran+Carine+Podgorica',
     ),
-    Restoran(
-      sehir: 'Podgorica',
-      isim: 'Sejdefa Ethno Jazz Club',
-      mutfak: 'Yerel Lezzetler & Tapas',
-      puan: '4.7 / 5.0',
-      aciklama: 'Canlı caz müzikleri eşliğinde geleneksel Karadağ lezzetlerini tadabileceğiniz otantik ve benzersiz bir mekan.',
-      haritaUrl: 'https://maps.google.com/?q=Sejdefa+Ethno+Jazz+Club',
-    ),
-
-    // Kotor
     Restoran(
       sehir: 'Kotor',
       isim: 'Galion Restaurant',
       mutfak: 'Deniz Ürünleri & Fine Dining',
       puan: '4.9 / 5.0',
-      aciklama: 'Kotor körfezi manzarasına nazır, taze deniz ürünleri ve dünya standartlarında şef dokunuşlarıyla lüks akşam yemekleri için 1 numara.',
+      aciklama: 'Kotor körfezi manzarasına nazır, taze deniz ürünleri ve lüks akşam yemekleri için 1 numaralı mekan.',
       haritaUrl: 'https://maps.google.com/?q=Galion+Restaurant+Kotor',
     ),
     Restoran(
@@ -292,17 +281,15 @@ class RestoranlarSayfasi extends StatelessWidget {
       isim: 'Konoba Scala Santa',
       mutfak: 'Akdeniz & Deniz Mahsulleri',
       puan: '4.6 / 5.0',
-      aciklama: 'Kotor Eski Şehir\'in tarihi atmosferinde, taş duvarlar arasında hizmet veren samimi ve leziz bir aile işletmesi.',
+      aciklama: 'Kotor Eski Şehir\'in tarihi atmosferinde, taş duvarlar arasında samimi bir aile işletmesi.',
       haritaUrl: 'https://maps.google.com/?q=Konoba+Scala+Santa+Kotor',
     ),
-
-    // Budva
     Restoran(
       sehir: 'Budva',
       isim: 'Konoba Stari Grad',
       mutfak: 'Balkan & Izgara',
       puan: '4.8 / 5.0',
-      aciklama: 'Budva Eski Kenti\'nin içinde, tarihi dokuyu hissederek yiyebileceğiniz en iyi ızgara ve yöresel yemek adreslerinden.',
+      aciklama: 'Budva Eski Kenti\'nin içinde, tarihi dokuyu hissederek yemek yiyebileceğiniz en iyi ızgara adresi.',
       haritaUrl: 'https://maps.google.com/?q=Konoba+Stari+Grad+Budva',
     ),
     Restoran(
@@ -313,14 +300,12 @@ class RestoranlarSayfasi extends StatelessWidget {
       aciklama: 'Deniz kenarında dalga sesleri eşliğinde taze balık yemek isteyenlerin Budva\'daki vazgeçilmez durağı.',
       haritaUrl: 'https://maps.google.com/?q=Jadran+kod+Krsta+Budva',
     ),
-
-    // Tivat
     Restoran(
       sehir: 'Tivat',
       isim: 'Marea Restaurant',
       mutfak: 'İtalyan & Deniz Ürünleri',
       puan: '4.8 / 5.0',
-      aciklama: 'Lüks yat limanı Porto Montenegro\'da, şık ve modern bir ortamda dünya mutfağından seçkin tatlar sunan mekan.',
+      aciklama: 'Porto Montenegro yat limanında, modern bir ortamda dünya mutfağından seçkin tatlar sunan mekan.',
       haritaUrl: 'https://maps.google.com/?q=Marea+Tivat',
     ),
   ];
