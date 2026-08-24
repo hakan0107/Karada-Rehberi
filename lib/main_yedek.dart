@@ -80,7 +80,6 @@ class AnaSayfa extends StatelessWidget {
   }
 }
 
-// ================= GEZİLECEK YERLER MODELİ =================
 class GezilecekYer {
   final String baslik;
   final String sehir;
@@ -150,6 +149,54 @@ class GezilecekYerlerSayfasi extends StatelessWidget {
       detayliAciklama: 'Karadağ\'ın kuzeyinde yer alan Durmitor Milli Parkı, Tara Nehri Kanyonu ve Kara Göl ile doğa severlerin vazgeçilmezidir.',
       resimUrl: 'https://picsum.photos/id/1057/800/600',
       haritaUrl: 'https://maps.google.com/?q=Durmitor+National+Park',
+    ),
+    GezilecekYer(
+      baslik: 'Biogradska Gora Millî Parkı',
+      sehir: 'Kolašin',
+      aciklama: 'Avrupa\'nın kalan son yaşlı ormanlarından biri ve ortasında büyüleyici göl.',
+      detayliAciklama: 'Bjelasica dağlarında yer alan milli park, devasa ağaçları ve Biogradsko gölü ile muazzam bir yürüyüş alanıdır.',
+      resimUrl: 'https://picsum.photos/id/1074/800/600',
+      haritaUrl: 'https://maps.google.com/?q=Biogradska+Gora',
+    ),
+    GezilecekYer(
+      baslik: 'Lovćen Millî Parkı & Njegoš Mozolesi',
+      sehir: 'Cetinje',
+      aciklama: 'Karadağ\'ın dağlık ruhunu temsil eden zirve ve muhteşem dağ manzarası.',
+      detayliAciklama: 'Lovćen dağının tepesinde bulunan anıt mezar, ülkenin neredeyse tamamını görebileceğiniz nefis bir panoramik açı sunar.',
+      resimUrl: 'https://picsum.photos/id/1025/800/600',
+      haritaUrl: 'https://maps.google.com/?q=Lovcen+National+Park',
+    ),
+    GezilecekYer(
+      baslik: 'Skadar Gölü Millî Parkı',
+      sehir: 'Virpazar',
+      aciklama: 'Balkanlar\'ın en büyük gölü, kuş cenneti ve tekne turlarının merkezi.',
+      detayliAciklama: 'Zengin bitki örtüsü ve endemik kuş türleriyle ünlü harika bir sulak alandır.',
+      resimUrl: 'https://picsum.photos/id/1016/800/600',
+      haritaUrl: 'https://maps.google.com/?q=Skadar+Lake',
+    ),
+    GezilecekYer(
+      baslik: 'Porto Montenegro',
+      sehir: 'Tivat',
+      aciklama: 'Lüks yatların, modern butiklerin ve şık restoranların bulunduğu marina bölgesi.',
+      detayliAciklama: 'Karadağ\'ın lüks turizm yüzü olan Tivat, modern mimarisi ve sahil yürüyüş yollarıyla popülerdir.',
+      resimUrl: 'https://picsum.photos/id/1024/800/600',
+      haritaUrl: 'https://maps.google.com/?q=Porto+Montenegro+Tivat',
+    ),
+    GezilecekYer(
+      baslik: 'Stari Bar (Eski Bar)',
+      sehir: 'Bar',
+      aciklama: 'Zeytin ağaçları arasında kalmış terk edilmiş tarihi sur şehir kalıntıları.',
+      detayliAciklama: 'Binlerce yıllık zeytin ağaçları ile çevrili olan bu antik kent, dağ eteklerinde gizlenmiş tarihi bir açıkhava müzesidir.',
+      resimUrl: 'https://picsum.photos/id/1031/800/600',
+      haritaUrl: 'https://maps.google.com/?q=Stari+Bar',
+    ),
+    GezilecekYer(
+      baslik: 'Perast ve Our Lady of the Rocks',
+      sehir: 'Kotor Körfezi',
+      aciklama: 'Barok tarzı sarayları ve körfezin ortasındaki yapay adasıyla masalsı kasaba.',
+      detayliAciklama: 'Kotor körfezinde yer alan Perast, karşısındaki kayalara kurulmuş yapay ada kilisesi ile en çok ziyaret edilen yerlerdendir.',
+      resimUrl: 'https://picsum.photos/id/1041/800/600',
+      haritaUrl: 'https://maps.google.com/?q=Perast+Montenegro',
     ),
   ];
 
@@ -251,19 +298,12 @@ class YerDetaySayfasi extends StatelessWidget {
   }
 }
 
-// ================= RESTORANLAR MODELİ VE SAYFASI =================
 class Restoran {
   final String sehir;
   final String isim;
   final String mutfak;
   final String puan;
-  final String fiyatSeviyesi;
-  final String calismaSaatleri;
-  final String adres;
-  final String telefon;
-  final String webSitesi;
   final String aciklama;
-  final String resimUrl;
   final String haritaUrl;
 
   const Restoran({
@@ -271,41 +311,22 @@ class Restoran {
     required this.isim,
     required this.mutfak,
     required this.puan,
-    required this.fiyatSeviyesi,
-    required this.calismaSaatleri,
-    required this.adres,
-    required this.telefon,
-    required this.webSitesi,
     required this.aciklama,
-    required this.resimUrl,
     required this.haritaUrl,
   });
 }
 
-class RestoranlarSayfasi extends StatefulWidget {
+class RestoranlarSayfasi extends StatelessWidget {
   const RestoranlarSayfasi({super.key});
 
-  @override
-  State<RestoranlarSayfasi> createState() => _RestoranlarSayfasiState();
-}
-
-class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
-  // Favori restoran isimlerini tutan set
-  final Set<String> _favoriler = {};
-
   static const List<Restoran> restoranlar = [
+    // Senin Eklediklerin (Özel Mekanlar & Stari Mlini)
     Restoran(
       sehir: 'Kotor',
       isim: 'Stari Mlini',
       mutfak: 'Deniz Ürünleri & Fine Dining',
       puan: '4.9 / 5.0',
-      fiyatSeviyesi: '€€€€ (Yüksek)',
-      calismaSaatleri: '12:00 - 23:00',
-      adres: 'Ljuta bb, Kotor 85330',
-      telefon: '+382 32 333 555',
-      webSitesi: 'https://www.starimlini.com',
       aciklama: 'Kotor Körfezi\'nde, tarihi bir su değirmeninden dönüştürülmüş, eşsiz manzarası ve üst düzey deniz ürünleriyle ünlü efsanevi restoran.',
-      resimUrl: 'https://picsum.photos/id/1020/800/600',
       haritaUrl: 'https://maps.google.com/?q=Stari+Mlini+Kotor',
     ),
     Restoran(
@@ -313,13 +334,7 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
       isim: 'Niagara Restoran',
       mutfak: 'Şelale Kenarı & Balık & Izgara',
       puan: '4.8 / 5.0',
-      fiyatSeviyesi: '€€€ (Orta-Yüksek)',
-      calismaSaatleri: '09:00 - 00:00',
-      adres: 'Cijevna bb, Podgorica',
-      telefon: '+382 67 234 567',
-      webSitesi: 'https://www.niagararestoran.com',
       aciklama: 'Şelale manzarasıyla ünlü, özellikle taze balık ve yöresel et yemekleri sunan efsanevi mekan.',
-      resimUrl: 'https://picsum.photos/id/1040/800/600',
       haritaUrl: 'https://maps.google.com/?q=Niagara+Restaurant+Podgorica',
     ),
     Restoran(
@@ -327,13 +342,7 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
       isim: 'Salas 23',
       mutfak: 'Doğal & Çiftlik Konsepti',
       puan: '4.7 / 5.0',
-      fiyatSeviyesi: '€€ (Orta)',
-      calismaSaatleri: '10:00 - 23:00',
-      adres: 'Spuž, Podgorica yakınları',
-      telefon: '+382 68 345 678',
-      webSitesi: 'https://www.salas23.me',
       aciklama: 'Doğal ortamı, çiftlik konsepti ve huzurlu atmosferiyle bilinen harika bir dinlenme ve yemek noktası.',
-      resimUrl: 'https://picsum.photos/id/1060/800/600',
       haritaUrl: 'https://maps.google.com/?q=Salas+23+Podgorica',
     ),
     Restoran(
@@ -341,13 +350,7 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
       isim: 'Restoran Dedovina',
       mutfak: 'Geleneksel Karadağ Mutfağı',
       puan: '4.8 / 5.0',
-      fiyatSeviyesi: '€€€ (Orta-Yüksek)',
-      calismaSaatleri: '08:00 - 23:00',
-      adres: 'Vaka Đurovića, Podgorica',
-      telefon: '+382 20 665 443',
-      webSitesi: 'https://www.dedovina.me',
       aciklama: 'Geleneksel Karadağ mutfağının en otantik lezzetlerini sunan popüler yerel restoran.',
-      resimUrl: 'https://picsum.photos/id/1050/800/600',
       haritaUrl: 'https://maps.google.com/?q=Restoran+Dedovina+Podgorica',
     ),
     Restoran(
@@ -355,13 +358,7 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
       isim: 'Spago',
       mutfak: 'Dünya Mutfağı & Pizza',
       puan: '4.6 / 5.0',
-      fiyatSeviyesi: '€€ (Orta)',
-      calismaSaatleri: '08:00 - 01:00',
-      adres: 'Bulevar Stanka Dragojevića, Podgorica',
-      telefon: '+382 20 667 889',
-      webSitesi: 'https://www.spagopg.me',
       aciklama: 'Şehir merkezinde lezzetli dünya mutfağı, pizza ve şık sunumlarıyla öne çıkan mekan.',
-      resimUrl: 'https://picsum.photos/id/1080/800/600',
       haritaUrl: 'https://maps.google.com/?q=Spago+Podgorica',
     ),
     Restoran(
@@ -369,13 +366,7 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
       isim: 'Zenghe',
       mutfak: 'Uzak Doğu & Asya Mutfağı',
       puan: '4.7 / 5.0',
-      fiyatSeviyesi: '€€€ (Orta-Yüksek)',
-      calismaSaatleri: '11:00 - 23:00',
-      adres: 'Moskovska, Podgorica',
-      telefon: '+382 20 234 111',
-      webSitesi: 'https://www.zenghe.me',
       aciklama: 'Podgorica\'da Uzak Doğu ve Asya mutfağı arayanlar için önde gelen restoranlardan biri.',
-      resimUrl: 'https://picsum.photos/id/1081/800/600',
       haritaUrl: 'https://maps.google.com/?q=Zenghe+Podgorica',
     ),
     Restoran(
@@ -383,27 +374,16 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
       isim: 'Perşemple',
       mutfak: 'Yerel & Kafe Restoran',
       puan: '4.6 / 5.0',
-      fiyatSeviyesi: '€€ (Orta)',
-      calismaSaatleri: '07:00 - 23:00',
-      adres: 'Center, Podgorica',
-      telefon: '+382 20 555 432',
-      webSitesi: 'https://www.persemple.me',
       aciklama: 'Şehrin sevilen ve samimi buluşma noktalarından biri.',
-      resimUrl: 'https://picsum.photos/id/1082/800/600',
       haritaUrl: 'https://maps.google.com/?q=Persemple+Podgorica',
     ),
+    // Eklenen Diğer Popüler Mekanlar (Asistan Tavsiyeleri)
     Restoran(
       sehir: 'Podgorica',
       isim: 'Pod Volat',
       mutfak: 'Balkan & Karadağ Mutfağı',
       puan: '4.8 / 5.0',
-      fiyatSeviyesi: '€€ (Orta)',
-      calismaSaatleri: '08:00 - 00:00',
-      adres: 'Trg Bećir-beg Osmanagića, Podgorica',
-      telefon: '+382 20 633 666',
-      webSitesi: 'https://www.podvolat.me',
       aciklama: 'Podgorica\'nın kalbinde geleneksel et yemekleri ve ev yapımı lezzetler.',
-      resimUrl: 'https://picsum.photos/id/1083/800/600',
       haritaUrl: 'https://maps.google.com/?q=Pod+Volat+Podgorica',
     ),
     Restoran(
@@ -411,13 +391,7 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
       isim: 'Galion Restaurant',
       mutfak: 'Deniz Ürünleri & Fine Dining',
       puan: '4.9 / 5.0',
-      fiyatSeviyesi: '€€€€ (Yüksek)',
-      calismaSaatleri: '13:00 - 23:30',
-      adres: 'Šetalište Kapetan Iva Vizina, Kotor',
-      telefon: '+382 32 337 400',
-      webSitesi: 'https://www.galion.me',
       aciklama: 'Kotor körfezi manzarasına nazır lüks akşam yemekleri ve şef tabakları.',
-      resimUrl: 'https://picsum.photos/id/1084/800/600',
       haritaUrl: 'https://maps.google.com/?q=Galion+Restaurant+Kotor',
     ),
     Restoran(
@@ -425,13 +399,7 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
       isim: 'Konoba Stari Grad',
       mutfak: 'Balkan & Izgara',
       puan: '4.8 / 5.0',
-      fiyatSeviyesi: '€€€ (Orta-Yüksek)',
-      calismaSaatleri: '10:00 - 00:00',
-      adres: 'Stari Grad, Budva 85310',
-      telefon: '+382 33 451 222',
-      webSitesi: 'https://www.konobastarigrad.me',
       aciklama: 'Budva Eski Kenti\'nin içinde tarihi dokuda geleneksel ızgara lezzetleri.',
-      resimUrl: 'https://picsum.photos/id/1085/800/600',
       haritaUrl: 'https://maps.google.com/?q=Konoba+Stari+Grad+Budva',
     ),
     Restoran(
@@ -439,13 +407,7 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
       isim: 'Restaurant Jadran Kod Krsta',
       mutfak: 'Deniz Ürünleri & Balık',
       puan: '4.7 / 5.0',
-      fiyatSeviyesi: '€€€ (Orta-Yüksek)',
-      calismaSaatleri: '08:00 - 00:00',
-      adres: 'Slovenska obala, Budva',
-      telefon: '+382 33 451 028',
-      webSitesi: 'https://www.jadranbudva.com',
       aciklama: 'Budva sahilinde onlarca yıldır taze balık ve deniz mahsulleri sunan efsane mekan.',
-      resimUrl: 'https://picsum.photos/id/1086/800/600',
       haritaUrl: 'https://maps.google.com/?q=Restaurant+Jadran+Kod+Krsta+Budva',
     ),
     Restoran(
@@ -453,14 +415,48 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
       isim: 'Marea Restaurant',
       mutfak: 'İtalyan & Deniz Ürünleri',
       puan: '4.8 / 5.0',
-      fiyatSeviyesi: '€€€€ (Yüksek)',
-      calismaSaatleri: '12:00 - 00:00',
-      adres: 'Porto Montenegro, Tivat',
-      telefon: '+382 32 674 888',
-      webSitesi: 'https://www.marea.me',
       aciklama: 'Porto Montenegro yat limanında şık ve seçkin tatlar.',
-      resimUrl: 'https://picsum.photos/id/1087/800/600',
       haritaUrl: 'https://maps.google.com/?q=Marea+Tivat',
+    ),
+    Restoran(
+      sehir: 'Tivat',
+      isim: 'Prinz Bernhard',
+      mutfak: 'Avrupa & Bira Evi',
+      puan: '4.6 / 5.0',
+      aciklama: 'Marina yakınında keyifli atmosferi ve zengin menüsüyle öne çıkan popüler restoran.',
+      haritaUrl: 'https://maps.google.com/?q=Prinz+Bernhard+Tivat',
+    ),
+    Restoran(
+      sehir: 'Virpazar (Skadar Gölü)',
+      isim: 'Restaurant Cermeniza',
+      mutfak: 'Göl Balığı & Yerel Şarap',
+      puan: '4.8 / 5.0',
+      aciklama: 'Skadar gölü kıyısında muazzam manzara eşliğinde sazan balığı ve ev yapımı şaraplar.',
+      haritaUrl: 'https://maps.google.com/?q=Cermeniza+Virpazar',
+    ),
+    Restoran(
+      sehir: 'Žabljak (Durmitor)',
+      isim: 'Or’o Restaurant',
+      mutfak: 'Dağ Mutfağı & Et Yemekleri',
+      puan: '4.8 / 5.0',
+      aciklama: 'Durmitor dağının eteklerinde kuzu eti, kaçamak ve geleneksel dağ yemekleri.',
+      haritaUrl: 'https://maps.google.com/?q=Oro+Restaurant+Zabljak',
+    ),
+    Restoran(
+      sehir: 'Bar',
+      isim: 'Kaldrma Stari Bar',
+      mutfak: 'Geleneksel Karadağ',
+      puan: '4.7 / 5.0',
+      aciklama: 'Tarihi Stari Bar kalıntılarının hemen girişinde otantik yöresel yemekler.',
+      haritaUrl: 'https://maps.google.com/?q=Kaldrma+Stari+Bar',
+    ),
+    Restoran(
+      sehir: 'Ulcinj',
+      isim: 'Restaurant Aragosta',
+      mutfak: 'Akdeniz & Deniz Ürünleri',
+      puan: '4.7 / 5.0',
+      aciklama: 'Ulcinj sahilinde dalga sesleri eşliğinde harika balık ve akşam yemeği.',
+      haritaUrl: 'https://maps.google.com/?q=Restaurant+Aragosta+Ulcinj',
     ),
   ];
 
@@ -474,188 +470,16 @@ class _RestoranlarSayfasiState extends State<RestoranlarSayfasi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Restoranlar ve Yemek Yerleri'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite, color: Colors.red),
-            onPressed: () {
-              // Favoriler filtrelenmiş liste veya bilgilendirme gösterilebilir
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Favori sayınız: ${_favoriler.length}')),
-              );
-            },
-          )
-        ],
-      ),
+      appBar: AppBar(title: const Text('Restoranlar ve Yemek Yerleri')),
       body: ListView.builder(
         itemCount: restoranlar.length,
         itemBuilder: (context, index) {
           final res = restoranlar[index];
-          final isFavori = _favoriler.contains(res.isim);
-
           return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            elevation: 3,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            clipBehavior: Clip.antiAlias,
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RestoranDetaySayfasi(restoran: res)),
-                );
-              },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Restoran Fotoğrafı ve Üst Bilgiler
-                  Stack(
-                    children: [
-                      Image.network(
-                        res.resimUrl,
-                        height: 160,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        errorBuilder: (c, e, s) => Container(
-                          height: 160,
-                          color: Colors.grey[300],
-                          child: const Icon(Icons.restaurant, size: 50, color: Colors.grey),
-                        ),
-                      ),
-                      Positioned(
-                        top: 8,
-                        right: 8,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: IconButton(
-                            icon: Icon(
-                              isFavori ? Icons.favorite : Icons.favorite_border,
-                              color: Colors.red,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                if (isFavori) {
-                                  _favoriler.remove(res.isim);
-                                } else {
-                                  _favoriler.add(res.isim);
-                                }
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 8,
-                        left: 8,
-                        child: Chip(
-                          label: Text(res.sehir, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                          backgroundColor: Colors.blueAccent,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                res.isim,
-                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                const Icon(Icons.star, color: Colors.amber, size: 18),
-                                const SizedBox(width: 4),
-                                Text(res.puan, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 4),
-                        Text(res.mutfak, style: TextStyle(color: Colors.grey[700], fontStyle: FontStyle.italic, fontSize: 13)),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            const Icon(Icons.euro_symbol, size: 16, color: Colors.green),
-                            const SizedBox(width: 4),
-                            Text(res.fiyatSeviyesi, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
-                            const Spacer(),
-                            const Icon(Icons.access_time, size: 16, color: Colors.grey),
-                            const SizedBox(width: 4),
-                            Text(res.calismaSaatleri, style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            OutlinedButton.icon(
-                              onPressed: () => _haritayiAc(res.haritaUrl),
-                              icon: const Icon(Icons.map, size: 16),
-                              label: const Text('Haritada Aç'),
-                              style: OutlinedButton.styleFrom(visualDensity: VisualDensity.compact),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-// ================= RESTORAN DETAY SAYFASI =================
-class RestoranDetaySayfasi extends StatelessWidget {
-  final Restoran restoran;
-  const RestoranDetaySayfasi({super.key, required this.restoran});
-
-  Future<void> _haritayiAc(String urlStr) async {
-    final Uri url = Uri.parse(urlStr);
-    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-      throw Exception('Harita açılamadı: $url');
-    }
-  }
-
-  Future<void> _aramayiBaslat(String tel) async {
-    final Uri url = Uri.parse('tel:$tel');
-    if (!await launchUrl(url)) {
-      throw Exception('Arama yapılamadı');
-    }
-  }
-
-  Future<void> _webAc(String webUrl) async {
-    final Uri url = Uri.parse(webUrl);
-    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-      throw Exception('Web sitesi açılamadı');
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(restoran.isim)),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Image.network(restoran.resimUrl, height: 250, fit: BoxFit.cover),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -663,67 +487,38 @@ class RestoranDetaySayfasi extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Chip(
-                        label: Text(restoran.sehir, style: const TextStyle(color: Colors.white)),
+                        label: Text(res.sehir, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                         backgroundColor: Colors.blueAccent,
                       ),
                       Row(
                         children: [
                           const Icon(Icons.star, color: Colors.amber, size: 20),
                           const SizedBox(width: 4),
-                          Text(restoran.puan, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          Text(res.puan, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                         ],
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Text(restoran.isim, style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
-                  Text(restoran.mutfak, style: TextStyle(color: Colors.grey[700], fontStyle: FontStyle.italic, fontSize: 16)),
-                  const SizedBox(height: 16),
-                  Text(restoran.aciklama, style: const TextStyle(fontSize: 15, height: 1.5)),
-                  const Divider(height: 30),
-                  
-                  // Detay Bilgileri Listesi
-                  ListTile(
-                    leading: const Icon(Icons.euro, color: Colors.green),
-                    title: const Text('Fiyat Seviyesi'),
-                    subtitle: Text(restoran.fiyatSeviyesi),
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.access_time, color: Colors.orange),
-                    title: const Text('Çalışma Saatleri'),
-                    subtitle: Text(restoran.calismaSaatleri),
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.location_on, color: Colors.red),
-                    title: const Text('Adres'),
-                    subtitle: Text(restoran.adres),
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.phone, color: Colors.blue),
-                    title: const Text('Telefon'),
-                    subtitle: Text(restoran.telefon),
-                    onTap: () => _aramayiBaslat(restoran.telefon),
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.language, color: Colors.purple),
-                    title: const Text('Web Sitesi'),
-                    subtitle: Text(restoran.webSitesi, style: const TextStyle(color: Colors.blue, decoration: TextDecoration.underline)),
-                    onTap: () => _webAc(restoran.webSitesi),
-                  ),
-                  const SizedBox(height: 20),
-
-                  // Harita Butonu
-                  ElevatedButton.icon(
-                    onPressed: () => _haritayiAc(restoran.haritaUrl),
-                    icon: const Icon(Icons.map),
-                    label: const Text('Haritada Konumunu Aç'),
-                    style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)),
+                  Text(res.isim, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 2),
+                  Text(res.mutfak, style: TextStyle(color: Colors.grey[700], fontStyle: FontStyle.italic)),
+                  const SizedBox(height: 8),
+                  Text(res.aciklama, style: const TextStyle(fontSize: 14)),
+                  const SizedBox(height: 10),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: OutlinedButton.icon(
+                      onPressed: () => _haritayiAc(res.haritaUrl),
+                      icon: const Icon(Icons.map, size: 18),
+                      label: const Text('Haritada Konumunu Aç'),
+                    ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
