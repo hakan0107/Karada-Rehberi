@@ -298,12 +298,11 @@ class YerDetaySayfasi extends StatelessWidget {
               yer.resimUrl,
               height: 250,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) =>
-                  const Container(
-                    height: 250,
-                    color: Colors.grey,
-                    child: Icon(Icons.image_not_supported, size: 80, color: Colors.white),
-                  ),
+              errorBuilder: (context, error, stackTrace) => Container(
+                height: 250,
+                color: Colors.grey,
+                child: const Icon(Icons.image_not_supported, size: 80, color: Colors.white),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
