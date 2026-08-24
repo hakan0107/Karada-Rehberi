@@ -69,7 +69,7 @@ class GezilecekYer {
   final String resimUrl;
   final String haritaUrl;
 
-  GezilecekYer({
+  const GezilecekYer({
     required this.baslik,
     required this.aciklama,
     required this.resimUrl,
@@ -122,6 +122,54 @@ class GezilecekYerlerSayfasi extends StatelessWidget {
       aciklama: 'Su zambakları, yüzlerce kuş türü ve tekne turlarıyla Balkanlar\'ın en büyük gölü.',
       resimUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300',
       haritaUrl: 'https://maps.google.com/?q=Skadar+Lake',
+    ),
+    GezilecekYer(
+      baslik: 'Podgorica Niagara Şelalesi',
+      aciklama: 'Cijevna nehri üzerinde, karların erimesiyle muazzam bir görsellik sunan şelale.',
+      resimUrl: 'https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=300',
+      haritaUrl: 'https://maps.google.com/?q=Niagara+Waterfall+Podgorica',
+    ),
+    GezilecekYer(
+      baslik: 'Dajbabe Manastırı (Beyaz Kilise)',
+      aciklama: 'Podgorica\'da bir mağaranın içine oyulmuş eşsiz ve manevi Ortodoks manastırı.',
+      resimUrl: 'https://images.unsplash.com/photo-1548625361-160a221f7c16?w=300',
+      haritaUrl: 'https://maps.google.com/?q=Dajbabe+Monastery',
+    ),
+    GezilecekYer(
+      baslik: 'Stari Bar (Eski Bar)',
+      aciklama: 'Dağ eteğinde kurulmuş, binlerce yıllık zeytin ağaçlarıyla dolu tarihi hayalet şehir.',
+      resimUrl: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=300',
+      haritaUrl: 'https://maps.google.com/?q=Stari+Bar',
+    ),
+    GezilecekYer(
+      baslik: 'Ülgün (Ulcinj)',
+      aciklama: 'Osmanlı izleri taşıyan, uzun plajları ve korsan geçmişiyle ünlü güney şehri.',
+      resimUrl: 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?w=300',
+      haritaUrl: 'https://maps.google.com/?q=Ulcinj',
+    ),
+    GezilecekYer(
+      baslik: 'Cetinje Tarihi Şehri',
+      aciklama: 'Karadağ\'ın eski kraliyet başkenti, tarihi müzeleri ve Cetinje Manastırı.',
+      resimUrl: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=300',
+      haritaUrl: 'https://maps.google.com/?q=Cetinje',
+    ),
+    GezilecekYer(
+      baslik: 'Perast & Kayalardaki Meryem',
+      aciklama: 'Venedik mimarili sakin kasaba ve açıklarındaki yapay adacık kilisesi.',
+      resimUrl: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=300',
+      haritaUrl: 'https://maps.google.com/?q=Perast',
+    ),
+    GezilecekYer(
+      baslik: 'Kolaşin Kayak Merkezi',
+      aciklama: 'Bjelasica Dağı eteklerinde modern pistleri ve kış turizmiyle ünlü dağ merkezi.',
+      resimUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300',
+      haritaUrl: 'https://maps.google.com/?q=Kolasin+Ski+Centre',
+    ),
+    GezilecekYer(
+      baslik: 'Biogradska Gora Milli Parkı',
+      aciklama: 'Avrupa\'nın son yaşlı ormanlarından biri ve ortasındaki büyüleyici buzul gölü.',
+      resimUrl: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=300',
+      haritaUrl: 'https://maps.google.com/?q=Biogradska+Gora',
     ),
   ];
 
